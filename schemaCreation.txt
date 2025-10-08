@@ -1,0 +1,108 @@
+🧠 What your code does
+const mongoose = require("mongoose");
+
+const productSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true },
+  sizes: [Number]
+});
+
+const Product = mongoose.model("Product", productSchema);
+
+
+Here’s the breakdown 👇
+
+1. productSchema
+
+This defines the shape of documents — what fields each product should have.
+
+Think of it like a blueprint for your “products” data.
+
+2. mongoose.model("Product", productSchema)
+
+This line actually creates a model class called Product.
+
+By default, Mongoose will:
+
+Look for a collection named products (notice the lowercase plural form)
+
+If it doesn’t exist, it will create one automatically when you insert your first document.
+
+So:
+
+mongoose.model("Product", productSchema);
+
+
+👉 Connects to (or creates) a collection named products in your MongoDB database.
+
+💡 Important detail:
+
+"Product" → Model name (singular, capitalized by convention)
+
+products → Collection name in MongoDB (lowercase + pluralized automatically)
+
+You can override this behavior by explicitly specifying the collection name:
+
+const Product = mongoose.model("Product", productSchema, "product");
+
+
+⬆️ That third argument "product" tells Mongoose to use exactly a collection called product.
+
+🧩 In your case
+
+If your Atlas database already has a collection named product, and you want Mongoose to use that exact collection, then do this:
+
+const Product = mongoose.model("Product", productSchema, "product");
+
+
+Otherwise, if you don’t mind Mongoose creating or using a pluralized name (products), your original code works fine.
+
+
+
+
+Model Name vs Collection Explained, and why don’t need to pass third argument 
+
+Exactly! Let me break it down clearly with Mongoose conventions:
+
+1️⃣ Model name
+mongoose.model("Product", productSchema);
+
+
+"Product" is the model name.
+
+It is singular and capitalized by convention.
+
+The model is what you use in your Node.js code to interact with MongoDB:
+
+const newProduct = new Product({ name: "Shoe", price: 120 });
+await newProduct.save();
+
+2️⃣ Default collection name
+
+By default, Mongoose automatically pluralizes and lowercases the model name to generate the collection name.
+
+"Product" → products
+
+"User" → users
+
+So if you don’t specify a collection name, Mongoose will use this automatic conversion.
+
+3️⃣ Overriding the collection name
+
+You can explicitly set the collection name by passing it as the third argument:
+
+const Product = mongoose.model("Product", productSchema, "product");
+
+
+Now Mongoose will use the exact collection name "product" in your database.
+
+This is useful if:
+
+You are working with an existing collection in MongoDB.
+
+You want a custom name that doesn’t follow the default pluralization.
+
+
+
+
+
