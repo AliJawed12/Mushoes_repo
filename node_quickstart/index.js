@@ -5,6 +5,8 @@ import { connectDB, mongoose } from "./schema-connection.js";
 // import Shoe from Shoe.js to initalize schema
 import Shoe from './models/Shoe.js';
 
+import seedDatabase from "./seed.js";
+
 async function run() {
 
   // run connectDb, connecting to database, and connecting schema to database
@@ -14,6 +16,10 @@ async function run() {
 
   const del = await Shoe.deleteMany({name: 'Sabrina 1'});
   console.log("Deleted many", del);
+
+  console.log("Seeding...");
+
+  await seedDatabase();
   
   // close mongoose safely
   await mongoose.connection.close();

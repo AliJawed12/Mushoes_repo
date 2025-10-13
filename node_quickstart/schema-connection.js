@@ -11,8 +11,7 @@ async function connectDB() {
   try {
     await mongoose.connect(uri, {
       dbName: "mushoes_inventory", // connects to specific database
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
+      // removed useNewUrlParser and useUnifiedTopology, since they aren't needed in Mongoose V7+
     });
     console.log("Mongoose connected to MongoDB!");
   } catch (err) {
