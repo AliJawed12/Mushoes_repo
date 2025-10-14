@@ -45,6 +45,42 @@ const shoeSchema = new Schema({
   },
   images: {
     type: Array
+  },
+
+  // MuShoes Unique Custom ID, called by the schema itself when new listing is being made.
+  mushoes_custom_id: {
+    type: String,
+    unique: true,
+    default: function() {
+      let mushoesUniqueId = "";
+      // create brandPart of uniqueID
+      let mushoesIDBrand = this.brand.toLowerCase().replace(/\s+/g, '');
+
+      // create name part of unique id
+      let mushoesIDName = "";
+      if (this.name.length >= 5) {
+        mushoesIDName = this.name.substring(0, 5).toLowerCase().replace(/\s+/g, '');
+      }
+      else {
+        mushoesIDName = this.name.toLowerCase().replace(/\s+/g, '');
+      }
+
+      let mushoesIDSize = this.size;
+
+      let mushoesIDColors = "";
+      if (this.color && this.color.length > 0) {
+        // Sort colors for consistency, then join with hyphen or comma
+        mushoesIDColors = this.color.map(c => c.toLowerCase().replace(/\s+/g, '')).sort().join("-");
+      }
+
+      let mushoesIDCondition = this.condition.trim().toLowerCase().replace(/\s+/g, '');
+      let mushoesIDGender = this.gender.toLowerCase().replace(/\s+/g, '');
+
+      mushoesUniqueId = `${mushoesIDBrand}-${mushoesIDName}-${mushoesIDCondition}-${mushoesIDColors}-${mushoesIDSize}-${mushoesIDGender}`;
+
+      // store this value;
+      return mushoesUniqueId;
+    }
   }
 
 }, {
