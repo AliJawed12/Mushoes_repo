@@ -14,11 +14,8 @@ async function run() {
 
   // All other functions run here, can use imported client to do queries  
 
-  const del = await Shoe.deleteMany({name: 'Sabrina 1'});
-  console.log("Deleted many", del);
-
+  // Method to seed the database with default data.
   console.log("Seeding...");
-
   await seedDatabase();
   
   // close mongoose safely
