@@ -4,6 +4,9 @@
 import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
+// import cloudinary for allow image hosting
+import cloudinary from '../cloudinary-connection.js';
+
 const shoeSchema = new Schema({
 
   name: {
@@ -25,7 +28,8 @@ const shoeSchema = new Schema({
     enum: ['M', 'F']
   },
   color: {
-    type: Array
+    type: [String],
+    default: []
   },
   condition: {
     type: String,
@@ -44,7 +48,8 @@ const shoeSchema = new Schema({
     type: String,
   },
   images: {
-    type: Array
+    type: [String],
+    default: []
   },
 
   // MuShoes Unique Custom ID, called by the schema itself when new listing is being made.
@@ -53,11 +58,9 @@ const shoeSchema = new Schema({
     unique: true,
     default: function() {
       let mushoesUniqueId = "";
-      // create brandPart of uniqueID
       let mushoesIDBrand = this.brand.toLowerCase().replace(/\s+/g, '');
-
-      // create name part of unique id
       let mushoesIDName = "";
+
       if (this.name.length >= 5) {
         mushoesIDName = this.name.substring(0, 5).toLowerCase().replace(/\s+/g, '');
       }
@@ -81,12 +84,44 @@ const shoeSchema = new Schema({
       // store this value;
       return mushoesUniqueId;
     }
+
+
   }
 
 }, {
   timestamps: true
 });
 
+
+// presave hook to upload images to cloudinary
+shoeSchema.pre('save', async function (next) {
+  if (!this.images || this.images.length === 0) return next();
+
+  const uploadedImagesURL = [];
+  for (const path of this.images) {
+    if (path.startsWith("http")) {
+      // image already uploaded
+      uploadedImagesURL.push(path);
+    }
+    else {
+      
+      try {
+        const result = await cloudinary.uploader.upload(path, {
+          folder: "mushoes-shoe-inventory"
+        });
+        uploadedImagesURL.push(result.secure_url);
+      } catch (err) {
+        console.error(`Image failed to upload ${path}:`, err);
+      }
+      
+    }
+  }
+
+  this.images = uploadedImagesURL;
+
+  // save document
+  next();
+});
 
 const Shoe = model('Shoe', shoeSchema);
 

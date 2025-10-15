@@ -18,7 +18,7 @@ const dataToSeed = [
 
   {name: "Bondi 9", brand: "Hoka", size: 9, gender: "F", color: ["Violet", "White"], condition: "Like New", price: 14999, stock: 1, description: `An imrovement in every facet on the Hoka Bondi 8`, images: []},
 
-  {name: "LeBron 20", brand: "Nike", size: 10, gender: "M", color: ["Black", "Gold"], condition: "Used", price: 18999, stock: 5, description: `The 20th anniversry of the "Chosen One's" signature shoe`, images: []}
+  {name: "LeBron 20", brand: "Nike", size: 10, gender: "M", color: ["Black", "Gold"], condition: "Used", price: 18999, stock: 5, description: `The 20th anniversry of the "Chosen One's" signature shoe`, images: ["../images/mushoes-logo.png"]}
 ];
 
 

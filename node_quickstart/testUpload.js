@@ -4,7 +4,7 @@ import cloudinary from "./cloudinary-connection.js";
 
 const uploadImage = async () => {
   try {
-    const result = await cloudinary.uploader.upload("../images/mushoes-icon.PNG", {
+    const result = await cloudinary.uploader.upload("../images/mushoes-logo.PNG", {
       folder: "mushoes-logos"
     });
 
