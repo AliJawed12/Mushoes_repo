@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>MuShoes</title>
+    <link rel="icon" type="image/png" href="images/mushoes-icon.PNG">
+
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/cart-sidebar.css">
+    <link rel="stylesheet" href="styles/admin-listings.css">
+
+    <!-- Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  </head>
+
+  <body>
+
+    <!-- Header -->
+
+    <div class="header">
+      <div class="header-left-logo">
+        <img src="images/mushoes-logo.png" alt="">
+      </div>
+
+      <div class="header-middle-title">
+        MuShoes
+      </div>
+
+      <div class="header-right-cart">
+        <button id="cart-text-button">cart (0)</button>
+      </div>
+    </div>
+
+    <!-- Code for product entries -->
+
+    <!-- Code for product entries -->
+    <div class="new-listings">
+
+      <label for="shoe_name">Shoe Name: </label>
+      <input type="text" name="name" id="shoe_name" required>
+
+      <label for="shoe_brand">Shoe Brand: </label>
+      <input type="text" name="brand" id="shoe_brand" required>
+
+      <label for="shoe_size">Shoe Size: </label>
+      <input type="number" name="size" id="shoe_size" required>
+
+      <label for="gender">Gender (M | F): </label>
+      <input type="text" maxlength="1" name="gender" id="gender" required pattern="[MF]">
+
+      <label for="shoe_color">Shoe Color(s): </label>
+      <input type="text" name="color" id="shoe_color" placeholder="Separate multiple colors with commas">
+
+      <label for="condition">Condition: </label>
+      <select name="condition" id="condition" required>
+        <option value="">Select condition</option>
+        <option value="New">New</option>
+        <option value="Used">Used</option>
+        <option value="Like New">Like New</option>
+      </select>
+
+      <label for="price">Price (cents): </label>
+      <input type="number" name="price" id="price" required step="0.01">
+
+      <label for="stock">Stock Quantity: </label>
+      <input type="number" name="stock" id="stock" required>
+
+      <label for="description">Description: </label>
+      <textarea name="description" id="description" rows="4"></textarea>
+
+      <label for="images">Images: </label>
+      <input type="file" name="images" id="images" multiple accept="image/*">
+
+      <button type="submit" id="submit_button">Add Shoe</button>
+
+    </div>
+
+
+    
+
+
+    <!-- code for cart -->
+    <div id="cart-sidebar">
+      <div class="cart-header">
+        Cart
+        <button id="cart-close-button">&times;</button>
+      </div>
+
+
+      <div class="cart-contents">
+      </div>
+
+
+      <div class="cart-checkout-buttons">
+        <button id="cart-checkout-button">Checkout</button>
+      </div>
+    </div>
+
+
+    
+
+
+    <script src="scripts/cart.js"></script>
+    <script src="node_quickstart/admin-dashboard-scripts.js"></script>
+    
+  </body>
+
+</html>

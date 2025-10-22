@@ -1,0 +1,8 @@
+.new-listings {
+  padding: 20px;
+  margin: 0;
+  background-color: aquamarine;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
