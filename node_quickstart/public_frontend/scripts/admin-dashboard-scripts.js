@@ -2,6 +2,8 @@
 
 const $id = id => document.getElementById(id);
 
+
+
 window.onload = function() {
   // Make sure you provide the ID of the element you want to target
   const submitButton = $id("submit_button"); // Replace "myButton" with your element's id
@@ -11,9 +13,9 @@ window.onload = function() {
 }
 
 
-function submitListing() {
+async function submitListing(e) {
 
-  event.preventDefault(); // Prevent form submission / page reload
+  e.preventDefault(); // Prevent form submission / page reload
 
   // Grab all values
   const shoeData = {
@@ -33,5 +35,15 @@ function submitListing() {
   alert("Shoe Submitted");
 
   // Example: you can now send this data via fetch() or do something else
+
+  const res = await fetch('/admin/dashboard/upload_listing', {
+    method: 'POST',
+    headers: {
+    'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ listing: shoeData })
+  });
+
+  console.log(await res.text());
 
 }

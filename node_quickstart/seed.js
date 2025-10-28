@@ -43,4 +43,27 @@ async function seedDatabase() {
 
 }
 
+// function for express routes to add a listing
+async function seedDatabaseExpress(newAdminListing) {
+
+
+  const tempShoe = new Shoe(newAdminListing);
+  const existsInDB = await Shoe.findOne({mushoes_custom_id: tempShoe.mushoes_custom_id});
+
+  if (existsInDB) {
+    // can remove this comment once published
+    console.log(`mushoes_custom_id: ${tempShoe.mushoes_custom_id} Already Exists...`);
+  }
+  else {
+    await tempShoe.save();
+    // can remove this comment once published
+    console.log(`mushoes_custom_id: ${tempShoe.mushoes_custom_id} inserted into database!`);
+  }
+
+
+  console.log("Seeding Complete...");
+
+}
+
+
 export default seedDatabase;
