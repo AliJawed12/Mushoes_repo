@@ -65,5 +65,5 @@ async function seedDatabaseExpress(newAdminListing) {
 
 }
 
-
-export default seedDatabase;
+// this used to be express default seedDatabase, changed to what it is now, likely cause of errors
+export {seedDatabase, seedDatabaseExpress};

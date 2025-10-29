@@ -28,7 +28,8 @@ async function submitListing(e) {
     price: parseFloat($id("price").value),
     stock: parseInt($id("stock").value),
     description: $id("description").value,
-    images: $id("images").files // FileList object
+    images: []// FileList object
+    // for now for images just sending empty string
   };
 
   console.log(shoeData);
