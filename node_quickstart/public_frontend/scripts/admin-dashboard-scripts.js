@@ -27,11 +27,12 @@ async function submitListing(e) {
     condition: $id("condition").value,
     price: parseFloat($id("price").value),
     stock: parseInt($id("stock").value),
-    description: $id("description").value,
-    images: []// FileList object
+    description: $id("description").value
+    //images: []// FileList object
     // for now for images just sending empty string
   };
 
+  /*
   console.log(shoeData);
   alert("Shoe Submitted");
 
@@ -46,5 +47,30 @@ async function submitListing(e) {
   });
 
   console.log(await res.text());
+  */
+
+  // Build FormData
+  const formData = new FormData();
+  formData.append("listing", JSON.stringify(shoeData));
+
+  const files = $id("shoe_images").files;
+  // Append image files
+  for (const file of files) {
+    formData.append("images", file);
+  }
+
+    try {
+      const res = await fetch("/admin/dashboard/upload_listing", {
+        method: "POST",
+        body: formData, // No headers — browser handles Content-Type
+      });
+
+      const data = await res.json();
+      console.log("Upload result:", data);
+      alert("Shoe uploaded successfully!");
+    } catch (err) {
+      console.error(err);
+      alert("Upload failed. Check console.");
+    }
 
 }
