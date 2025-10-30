@@ -3,6 +3,19 @@ import express from 'express';
 const app = express();
 const port = 5000;
 
+// get user and pass from env file
+const ADMIN_USER = process.env.ADMIN_USER;
+const ADMIN_PASS = process.env.ADMIN_PASS;
+
+// import basic authentication to protect certain pages
+import basicAuth from 'express-basic-auth';
+
+// add authentication to any route which has /admin
+app.use('/admin', basicAuth({
+  users: { [ADMIN_USER]: ADMIN_PASS },
+  challenge: true // triggers the browsers login prompt
+}));
+
 // host frontend in backend server by grabbing all static files from public_frontend folder
 app.use(express.static('public_frontend'));
 app.use(express.json());
@@ -30,7 +43,7 @@ app.post("/admin/dashboard/upload_listing", upload.array("images"), async (req, 
   try {
     // Parse JSON from FormData
     const listing = JSON.parse(req.body.listing);
-    console.log("I think server received:", listing);
+    console.log("Server received:", listing);
 
     // Add paths to listing.images
     listing.images = req.files.map(file => file.path);
