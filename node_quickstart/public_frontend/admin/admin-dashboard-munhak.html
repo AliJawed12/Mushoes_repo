@@ -9,8 +9,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
     <title>MuShoes</title>
-
-
    
     <link rel="stylesheet" href="/styles/admin-listings.css">
     
@@ -32,8 +30,18 @@
 
     <!-- Code for product entries -->
 
+    <div id="admin_operations">
+      <label for="admin_operation">Select an operation:</label>
+      <select name="admin_operation" id="admin_operation" required>
+        <option value="">Select Operation</option>
+        <option value="Upload Listing">Upload Listing</option>
+        <option value="Delete Listing">Delete Listing</option>
+      </select>
+
+    </div>
+
     <!-- Code for product entries -->
-    <div class="new-listings">
+    <div id="upload_listing" class="upload_listing_style hide_form">
 
       <label for="shoe_name">Shoe Name: </label>
       <input type="text" name="name" id="shoe_name" required>
@@ -74,16 +82,16 @@
 
     </div>
 
+    <!-- Code for Product Deletion --> 
+     <div id="delete_listing" class="delete_listing_styles hide_form">
+      <button id="delete_button">Delete</button>
+     </div>
+
 
     
 
 
     <!-- code for cart -->
-   
-
-
-    
-
 
     <!-- <script src="scripts/cart.js"></script> -->
     <script src="/scripts/admin-dashboard-scripts.js"></script>

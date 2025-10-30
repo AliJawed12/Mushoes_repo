@@ -27,6 +27,9 @@ import { connectDB, mongoose } from "./schema-connection.js";
 // import Shoe to be able to add listings to schema
 import Shoe from "./models/Shoe.js";
 
+// import read_database to read all data from MongoDB
+import readAllListings from './read_database.js';
+
 // import multer to be able to use for image file processing
 import multer from "multer";
 
@@ -55,9 +58,23 @@ app.post("/admin/dashboard/upload_listing", upload.array("images"), async (req, 
     res.status(201).json({ message: "Listing uploaded successfully!", shoe });
   } catch (err) {
     console.error("Error while uploading listing:", err);
-    res.status(500).json({ message: "Server error", error: err.message });
+    res.status(500).json({ message: "Server error while uploading listing", error: err.message });
   }
 });
+
+// route to allow admin to view all listings currently within the MongoDB database
+app.get("/admin/dashboard/delete_listing", async (req, res) => {
+
+  try {
+
+    const allListings = await readAllListings();
+    res.status(200).json({message: "Listings read succesfully from MongoDB!", listings: allListings});
+  }
+  catch (err) {
+    console.error("Error while reading listings in ExpressServer.js", err);
+    res.status(500).json({message: "Server Error while reading all listings", error: err.message});
+  }
+}); 
 
 
 // connect to mongodb first, then start server

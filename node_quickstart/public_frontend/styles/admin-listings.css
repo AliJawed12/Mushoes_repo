@@ -1,8 +1,23 @@
-.new-listings {
+.upload_listing_style {
   padding: 20px;
   margin: 0;
   background-color: aquamarine;
   justify-content: center;
   display: flex;
   flex-direction: column;
+}
+
+.upload_listing_style label {
+  display: block; /* ensure label is above input */
+  margin-bottom: 5px; /* optional spacing */
+}
+
+.upload_listing_style input,
+.upload_listing_style select,
+.upload_listing_style textarea {
+  width: 100%; /* optional: inputs fill the container width */
+}
+
+.hide_form {
+  display: none;
 }

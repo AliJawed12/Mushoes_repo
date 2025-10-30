@@ -5,11 +5,46 @@ const $id = id => document.getElementById(id);
 
 // when window loads automatically add eventlistener
 window.onload = function() {
+  // display the content for selected operation
+  const uploadListing = $id("upload_listing");
+  const deleteListing = $id("delete_listing");
+  //uploadListing.style.display = "none";
+
+  const adminOperations = $id("admin_operation");
+
+  // When dropdown changes
+  adminOperations.addEventListener("change", function() {
+    const adminOp = adminOperations.value;
+
+    if (adminOp === "Select Operation") {
+      uploadListing.style.display = "none";
+      deleteListing.style.display = "none";
+    }
+    else if (adminOp === "Upload Listing") {
+      uploadListing.style.display = "block";
+      deleteListing.style.display = "none";
+    }
+    else if (adminOp === "Delete Listing") {
+      deleteListing.style.display = "block";
+      uploadListing.style.display = "none";
+    }
+
+  });
+  
+
   // Make sure you provide the ID of the element you want to target
   const submitButton = $id("submit_button");
   if (submitButton) {
     submitButton.addEventListener("click", submitListing);
   }
+
+  // adding event handler for delte button
+  const deleteButton = $id("delete_button");
+  if (deleteButton) {
+    deleteButton.addEventListener("click", viewAllListings);
+  }
+
+  
 }
 
 
@@ -60,6 +95,7 @@ async function submitListing(e) {
 
 }
 
+// helper function to check user entry validation for submit listings
 function formValidation() {
 
   if ($id("shoe_name").value.trim() === "") {
@@ -106,4 +142,21 @@ function formValidation() {
   }
 
   return true; // all checks passed
+}
+
+// method which for now immediatlly connects to get route
+
+async function viewAllListings() {
+
+  try {
+    const res = await fetch('/admin/dashboard/delete_listing', {
+      method: 'GET'
+  });
+    const data = await res.json();
+    console.log("This is all from the frontend")
+    console.log(data);
+  } catch (err) {
+    console.error("Fetch error:", err);
+  }
+
 }
