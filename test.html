@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project 2 Shop</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ------------------- CSS ------------------- */
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: #fff;
+    }
+
+    .shop-rows {
+      padding: 20px 65px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      column-gap: 20px;
+      row-gap: 80px;
+    }
+
+    .item-listing {
+      border: 1px solid #eee;
+      border-radius: 8px;
+      overflow: hidden;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .item-listing:hover {
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .item-listing-image {
+      width: 100%;
+      height: 50vh;
+      overflow: hidden;
+    }
+
+    .item-listing-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .item-listing:hover .item-listing-image img {
+      transform: scale(1.1);
+    }
+
+    .item-listing-description {
+      display: flex;
+      flex-direction: row;
+      padding: 10px;
+    }
+
+    .item-description-details {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 14px;
+    }
+
+    .item-color-description {
+      flex: 1;
+      align-items: flex-end;
+      align-self: flex-end;
+      text-align: end;
+      font-size: 12px;
+      text-transform: uppercase;
+      color: gray;
+    }
+
+    .item-listing-des-brand { color: gray; font-size: 12px; }
+    .item-listing-des-name { text-transform: uppercase; font-weight: 600; }
+    .item-listing-des-price { font-weight: bold; }
+    .item-listing-des-size,
+    .item-listing-des-gender,
+    .item-listing-des-condition,
+    .item-listing-des-stock { font-size: 12px; color: #555; }
+
+    @media (max-width: 900px) {
+      .shop-rows { grid-template-columns: repeat(2, 1fr); padding: 20px 32px; }
+      .item-listing-image { height: 40vh; }
+    }
+
+    @media (max-width: 600px) {
+      .shop-rows { grid-template-columns: 1fr; padding: 20px 16px; }
+      .item-listing-image { height: 35vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="shop-rows products-grid"></div>
+
+  <script>
+    /* ------------------- JS ------------------- */
+    // Example array of products (replace this with your data)
+    const products = [
+      {
+        _id: "1",
+        name: "Air Max 270",
+        brand: "Nike",
+        price: 12000, // in cents
+        color: "Red",
+        size: "10",
+        gender: "Men",
+        condition: "New",
+        stock: 5,
+        image: "https://res.cloudinary.com/demo/image/upload/sample.jpg"
+      },
+      {
+        _id: "2",
+        name: "Ultraboost 22",
+        brand: "Adidas",
+        price: 15000,
+        color: "Black",
+        size: "9",
+        gender: "Women",
+        condition: "New",
+        stock: 8,
+        image: "https://res.cloudinary.com/demo/image/upload/sample.jpg"
+      }
+    ];
+
+    const container = document.querySelector('.products-grid');
+
+    let itemsHTML = '';
+
+    products.forEach(product => {
+      itemsHTML += `
+        <div class="item-listing">
+
+          <div class="item-listing-image">
+            <img src="${product.image}" alt="${product.name}">
+          </div>
+
+          <div class="item-listing-description">
+
+            <div class="item-description-details">
+              <div class="item-listing-des-brand">${product.brand}</div>
+              <div class="item-listing-des-name">${product.name}</div>
+              <div class="item-listing-des-price">$${(product.price/100).toFixed(2)} USD</div>
+              <div class="item-listing-des-size">Size: ${product.size || 'N/A'}</div>
+              <div class="item-listing-des-gender">Gender: ${product.gender || 'N/A'}</div>
+              <div class="item-listing-des-condition">Condition: ${product.condition || 'N/A'}</div>
+              <div class="item-listing-des-stock">Stock: ${product.stock || 'N/A'}</div>
+            </div>
+
+            <div class="item-color-description">${product.color}</div>
+
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = itemsHTML;
+  </script>
+
+</body>
+</html>

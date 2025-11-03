@@ -62,7 +62,12 @@ async function submitListing(e) {
     brand: $id("shoe_brand").value,
     size: parseFloat($id("shoe_size").value),
     gender: $id("gender").value.toUpperCase(),
-    color: $id("shoe_color").value.split(",").map(c => c.trim()), // array of colors
+    color: $id("shoe_color").value
+      .split(",")
+      .map(c => c.trim())
+      .filter(c => c.length > 0) // remove empty entries from trailing commas
+      .sort((a, b) => a.localeCompare(b)),
+    //color: $id("shoe_color").value.split(",").map(c => c.trim()), // array of colors
     condition: $id("condition").value,
     price: parseFloat($id("price").value),
     stock: parseInt($id("stock").value),
@@ -85,12 +90,16 @@ async function submitListing(e) {
       body: formData, // No headers needed since not JSON
     });
 
+    // disable submit button while awaiting 
+    $id("submit_button").disabled = true;
     const data = await res.json();
     console.log("Upload result:", data);
     alert("Shoe uploaded successfully!");
+    $id("submit_button").disabled = false;
   } catch (err) {
     console.error(err);
     alert("Upload failed. Check console.");
+    $id("submit_button").disabled = false;
   }
 
 }
@@ -155,8 +164,47 @@ async function viewAllListings() {
     const data = await res.json();
     console.log("This is all from the frontend")
     console.log(data);
+    showcaseListings(data.listings);
   } catch (err) {
     console.error("Fetch error:", err);
   }
 
+}
+
+
+function showcaseListings(listings) {
+  const container = document.querySelector('.products-grid');
+  let itemsHTML = '';
+
+  const cloudinaryBase = 'https://res.cloudinary.com/dasqssuki/image/upload/';
+
+  listings.forEach(product => {
+    const imgSrc = product.images?.[0]
+      ? (product.images[0].startsWith('http') ? product.images[0] : cloudinaryBase + product.images[0])
+      : 'images/placeholder.png';
+
+    itemsHTML += `
+      <div class="item-listing">
+        <div class="item-listing-image">
+          <img src="${imgSrc}" alt="${product.name}">
+        </div>
+
+        <div class="item-listing-description">
+          <div class="item-description-details">
+            <div class="item-listing-des-brand">${product.brand}</div>
+            <div class="item-listing-des-name">${product.name}</div>
+            <div class="item-listing-des-price">$${(product.price/100).toFixed(2)} USD</div>
+            <div class="item-listing-des-size">Size: ${product.size || 'N/A'}</div>
+            <div class="item-listing-des-gender">Gender: ${product.gender || 'N/A'}</div>
+            <div class="item-listing-des-condition">Condition: ${product.condition || 'N/A'}</div>
+            <div class="item-listing-des-stock">Stock: ${product.stock || 'N/A'}</div>
+          </div>
+
+          <div class="item-color-description">${product.color.join(', ')}</div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = itemsHTML;
 }
