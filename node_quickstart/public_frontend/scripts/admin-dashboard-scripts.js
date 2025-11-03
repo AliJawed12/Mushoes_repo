@@ -27,6 +27,7 @@ window.onload = function() {
     else if (adminOp === "Delete Listing") {
       deleteListing.style.display = "block";
       uploadListing.style.display = "none";
+      viewAllListings();
     }
 
   });
@@ -38,11 +39,6 @@ window.onload = function() {
     submitButton.addEventListener("click", submitListing);
   }
 
-  // adding event handler for delte button
-  const deleteButton = $id("delete_button");
-  if (deleteButton) {
-    deleteButton.addEventListener("click", viewAllListings);
-  }
 
   
 }
@@ -184,7 +180,7 @@ function showcaseListings(listings) {
       : 'images/placeholder.png';
 
     itemsHTML += `
-      <div class="item-listing">
+      <div class="item-listing item-listing-delete">
         <div class="item-listing-image">
           <img src="${imgSrc}" alt="${product.name}">
         </div>
