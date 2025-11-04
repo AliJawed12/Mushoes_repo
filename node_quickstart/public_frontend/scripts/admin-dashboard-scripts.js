@@ -154,7 +154,7 @@ function formValidation() {
 async function viewAllListings() {
 
   try {
-    const res = await fetch('/admin/dashboard/delete_listing', {
+    const res = await fetch('/admin/dashboard/view_deletable_listings', {
       method: 'GET'
   });
     const data = await res.json();
@@ -180,7 +180,7 @@ function showcaseListings(listings) {
       : 'images/placeholder.png';
 
     itemsHTML += `
-      <div class="item-listing item-listing-delete">
+      <div class="item-listing delete-item-listing" data-id="${product._id}">
         <div class="item-listing-image">
           <img src="${imgSrc}" alt="${product.name}">
         </div>
@@ -203,4 +203,51 @@ function showcaseListings(listings) {
   });
 
   container.innerHTML = itemsHTML;
+  listingDeletionFunctionality();
+}
+
+
+// add delete functionality to all listings
+function listingDeletionFunctionality(){
+  document.querySelectorAll(".delete-item-listing").forEach(listing => {
+    listing.addEventListener("click", () => {
+
+      if (confirm("Do you want to delete this listing?")) {
+        const listingUniqueMongoDBID = listing.dataset.id;
+        // call to async function to delete the listing
+        deleteListingRequest(listingUniqueMongoDBID);
+        // call to viewAllListings to update the page on the client side
+        viewAllListings();
+        console.log("Deleting Item: ", listingUniqueMongoDBID);
+        alert("Listing Deleted!");
+      }
+      else {
+        alert("Deletion Canceled!");
+      }
+
+      
+    });
+  });
+}
+
+async function deleteListingRequest(mongoID) {
+
+  try {
+
+    const res = await fetch("/admin/dashboard/delete_listing", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ mongoID: mongoID }),
+    });
+
+    const data = await res.json();
+    console.log(data.message);
+
+  }
+  catch (err) {
+    console.error(err);
+    alert("Error with fetch post request in admin_dashboard_scripts.js");
+  }
 }

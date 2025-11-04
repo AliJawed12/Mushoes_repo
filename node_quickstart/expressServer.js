@@ -28,7 +28,7 @@ import { connectDB, mongoose } from "./schema-connection.js";
 import Shoe from "./models/Shoe.js";
 
 // import read_database to read all data from MongoDB
-import readAllListings from './read_database.js';
+import { readAllListings, deleteAListing } from './read_database.js';
 
 // import multer to be able to use for image file processing
 import multer from "multer";
@@ -63,7 +63,8 @@ app.post("/admin/dashboard/upload_listing", upload.array("images"), async (req, 
 });
 
 // route to allow admin to view all listings currently within the MongoDB database
-app.get("/admin/dashboard/delete_listing", async (req, res) => {
+// each listing is initalized with deletion functionality on click!
+app.get("/admin/dashboard/view_deletable_listings", async (req, res) => {
 
   try {
 
@@ -75,6 +76,21 @@ app.get("/admin/dashboard/delete_listing", async (req, res) => {
     res.status(500).json({message: "Server Error while reading all listings", error: err.message});
   }
 }); 
+
+// Helper route to "/admin/dashboard/delete_listing", once a listing is clicked,
+// and deletion is confirmed, this route is called to send the MongoDB to delete
+app.post("/admin/dashboard/delete_listing", async (req, res) => {
+  try {
+    const listingMongoID = req.body.mongoID;
+    console.log(`Deleting ${listingMongoID} `);
+    const deletionConfirmation = await deleteAListing(listingMongoID);
+    res.status(200).json({message: "Listing Deleted Succesfully!", listing: listingMongoID});
+  }
+  catch (err) {
+    console.error("Error while deleting listing in ExpressServer.js", err);
+    res.status(500).json({message: "Server Error while deleting a listing", error: err.message});
+  }
+});
 
 
 // connect to mongodb first, then start server
