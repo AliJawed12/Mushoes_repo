@@ -1,9 +1,10 @@
-/* read_database.js */
+/* mongo_db_express_queries */
 
-/*  */
+/* File containing helper functions/scripts which Express uses to run queries/operations on the MonogDB database */
 
 import Shoe from "./models/Shoe.js";
 
+// Helper function for "/admin/dashboard/view_deletable_listings" route. When called displays all listings from MongoDB
 async function readAllListings() {
 
   try {
@@ -17,6 +18,8 @@ async function readAllListings() {
   return [];
 }
 
+
+// Helper function for "/admin/dashboard/delete_listing", called in route to delete a listing from MongoDB
 async function deleteAListing(listingMongoID) {
   try {
     const deleteListing = await Shoe.deleteOne({ _id: listingMongoID });

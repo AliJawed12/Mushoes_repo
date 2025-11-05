@@ -1,5 +1,6 @@
 "use strict";
 
+// shortcut to grabbing elements by id from dom
 const $id = id => document.getElementById(id);
 
 
@@ -8,11 +9,9 @@ window.onload = function() {
   // display the content for selected operation
   const uploadListing = $id("upload_listing");
   const deleteListing = $id("delete_listing");
-  //uploadListing.style.display = "none";
-
   const adminOperations = $id("admin_operation");
 
-  // When dropdown changes
+  // When the dropdown selection changes, these operations will occur
   adminOperations.addEventListener("change", function() {
     const adminOp = adminOperations.value;
 
@@ -33,22 +32,26 @@ window.onload = function() {
   });
   
 
-  // Make sure you provide the ID of the element you want to target
+  // Add button functionality to submit_button, on click runs submitListing function
   const submitButton = $id("submit_button");
   if (submitButton) {
     submitButton.addEventListener("click", submitListing);
   }
 
-
-  
 }
 
 
+// submitListing function which grabs data from submit form, compile data into FormData, then parse into upload_listing route
 async function submitListing(e) {
+
+  // disable submit button while awaiting 
+  $id("submit_button").disabled = true;
 
   e.preventDefault(); // Prevent form submission / page reload
 
+  // check if the values in the form are valid before continuing with this function
   if (!formValidation()) {
+    $id("submit_button").disabled = false;
     return;
   }
 
@@ -80,14 +83,13 @@ async function submitListing(e) {
     formData.append("images", file);
   }
 
+  // send data to endpoint here
   try {
     const res = await fetch("/admin/dashboard/upload_listing", {
       method: "POST",
       body: formData, // No headers needed since not JSON
     });
 
-    // disable submit button while awaiting 
-    $id("submit_button").disabled = true;
     const data = await res.json();
     console.log("Upload result:", data);
     alert("Shoe uploaded successfully!");
@@ -149,8 +151,7 @@ function formValidation() {
   return true; // all checks passed
 }
 
-// method which for now immediatlly connects to get route
-
+// method which connects to get '/admin/dashboard/view_deletable_listings' endpoint and displays all listings in the MongoDB database
 async function viewAllListings() {
 
   try {
@@ -167,7 +168,8 @@ async function viewAllListings() {
 
 }
 
-
+// Helper function for viewAllListings, takes listings JSON parameter which has a Array of all listings and data from MongoDB
+// this function generates HTML to display
 function showcaseListings(listings) {
   const container = document.querySelector('.products-grid');
   let itemsHTML = '';
@@ -203,11 +205,13 @@ function showcaseListings(listings) {
   });
 
   container.innerHTML = itemsHTML;
+
+  // is ran every time, should not cause issues because acutal code in function requires clicking of a listing to enable deletion
   listingDeletionFunctionality();
 }
 
 
-// add delete functionality to all listings
+// add delete functionality to all listings, on click allows option to delete
 function listingDeletionFunctionality(){
   document.querySelectorAll(".delete-item-listing").forEach(listing => {
     listing.addEventListener("click", () => {
@@ -224,12 +228,14 @@ function listingDeletionFunctionality(){
       else {
         alert("Deletion Canceled!");
       }
-
       
     });
   });
 }
 
+
+// Route function for deleting a listing. Called when a listing is selected and confirmed to be deleted. 
+// Takes in the listing mongoDB id, parses to endpoint, where endpoint deletes it
 async function deleteListingRequest(mongoID) {
 
   try {

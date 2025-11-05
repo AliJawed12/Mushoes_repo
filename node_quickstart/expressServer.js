@@ -1,13 +1,20 @@
 // expressServer.js
+/* Contains all routes, endpoints needed to have connectivity between frontend and backend as well as routes needed to perform opeartions between frontend and backend, and backend and frontend */
+
+// Express Imports here
 import express from 'express';
 const app = express();
 const port = 5000;
 
-// get user and pass from env file
+//--------------------------------
+// Admin Frontend Authentication
+//--------------------------------
+
+// Get ADMIN_USER and ADMIN_PASS from .env: This is authentication for admin-dashboard frontend page access
 const ADMIN_USER = process.env.ADMIN_USER;
 const ADMIN_PASS = process.env.ADMIN_PASS;
 
-// import basic authentication to protect certain pages
+// import basic authentication to protect admin-dashboard frontend pages
 import basicAuth from 'express-basic-auth';
 
 // add authentication to any route which has /admin
@@ -20,6 +27,10 @@ app.use('/admin', basicAuth({
 app.use(express.static('public_frontend'));
 app.use(express.json());
 
+//----------
+// Imports
+//----------
+
 // import connectDB to connect to mongoDB, importing mongoose as well, but shouldn't be used since 
 // won't be closing mongoose connection like I did in index.js when conencting with node.js
 import { connectDB, mongoose } from "./schema-connection.js";
@@ -28,18 +39,27 @@ import { connectDB, mongoose } from "./schema-connection.js";
 import Shoe from "./models/Shoe.js";
 
 // import read_database to read all data from MongoDB
-import { readAllListings, deleteAListing } from './read_database.js';
+import { readAllListings, deleteAListing } from './mongo_db_express_queries.js';
 
-// import multer to be able to use for image file processing
+//----------------------------------
+// Image Processing Functionality
+//----------------------------------
+
+// Need this for "/admin/dashboard/upload_listing", when adding images from computer storage to allow for hosting to cloud 
+
+// import multer to be able to use for image file processing for "/admin/dashboard/upload_listing"
 import multer from "multer";
-
-
 // code to process image files from "/admin/dashboard/upload_listing" endpoint allowing for image publishing on cloudinary
 const storage = multer.diskStorage({
   destination: "temp_image_uploads/",
   filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
 });
 const upload = multer({ storage });
+
+
+//---------
+// Routes
+//---------
 
 // route allowing admin to publish a listing from admin-dashboard-munhak.html file to database
 app.post("/admin/dashboard/upload_listing", upload.array("images"), async (req, res) => {
@@ -92,6 +112,10 @@ app.post("/admin/dashboard/delete_listing", async (req, res) => {
   }
 });
 
+
+//---------------------
+// Running the Server
+//---------------------
 
 // connect to mongodb first, then start server
 const startServer = async () => {
