@@ -82,8 +82,7 @@ app.post("/admin/dashboard/upload_listing", upload.array("images"), async (req, 
   }
 });
 
-// route to allow admin to view all listings currently within the MongoDB database
-// each listing is initalized with deletion functionality on click!
+// route to allow admin to view all listings currently within the MongoDB database, used for deleting
 app.get("/admin/dashboard/view_deletable_listings", async (req, res) => {
 
   try {
@@ -111,6 +110,20 @@ app.post("/admin/dashboard/delete_listing", async (req, res) => {
     res.status(500).json({message: "Server Error while deleting a listing", error: err.message});
   }
 });
+
+// route to allow admin to view all listings currently within the MongoDB database
+app.get("/admin/dashboard/view_all_listings", async (req, res) => {
+
+  try {
+
+    const allListings = await readAllListings();
+    res.status(200).json({message: "Listings read succesfully from MongoDB!", listings: allListings});
+  }
+  catch (err) {
+    console.error("Error while reading listings in ExpressServer.js", err);
+    res.status(500).json({message: "Server Error while reading all listings", error: err.message});
+  }
+}); 
 
 
 //---------------------

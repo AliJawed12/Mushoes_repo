@@ -1,0 +1,288 @@
+
+
+/* ------------------- CSS ------------------- */
+/* Code form admin-all-listings.css */
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: #fff;
+}
+
+.shop-rows {
+  padding: 20px 65px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 20px;
+  row-gap: 80px;
+}
+
+.item-listing {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+.item-listing:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.item-listing-image {
+  width: 100%;
+  height: 50vh;
+  overflow: hidden;
+}
+
+.item-listing-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.item-listing:hover .item-listing-image img {
+  transform: scale(1.1);
+}
+
+.item-listing-description {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.item-description-details {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 14px;
+}
+
+.item-color-description {
+  flex: 1;
+  align-items: flex-end;
+  align-self: flex-end;
+  text-align: end;
+  font-size: 12px;
+  text-transform: uppercase;
+  color: gray;
+}
+
+.item-listing-des-brand { color: gray; font-size: 12px; }
+.item-listing-des-name { text-transform: uppercase; font-weight: 600; }
+.item-listing-des-price { font-weight: bold; }
+.item-listing-des-size,
+.item-listing-des-gender,
+.item-listing-des-condition,
+.item-listing-des-stock { font-size: 12px; color: #555; }
+
+@media (max-width: 900px) {
+  .shop-rows { grid-template-columns: repeat(2, 1fr); padding: 20px 32px; }
+  .item-listing-image { height: 40vh; }
+}
+
+@media (max-width: 600px) {
+  .shop-rows { grid-template-columns: 1fr; padding: 20px 16px; }
+  .item-listing-image { height: 35vh; }
+}
+
+
+
+/* Cart-sidebar code  */
+
+/* Cart sidebar styling */
+
+/* General Styling */
+#cart-sidebar {
+  position: fixed;           /* Fix the cart on the screen */
+  top: 0;                    /* Place it at the top of the viewport */
+  right: -26.875rem;             /* Start hidden off-screen */
+  width: 26.875rem;              /* Set width */
+  height: 100vh;             /* Take full height of the viewport */
+  background-color: rgb(250,248,240);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease-in-out;  /* Smooth transition for sliding effect */
+  z-index: 9999;             /* Ensure it's above other elements */
+  /*padding: 20px;*/
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+  
+}
+
+/* Styling for the header of cart which includes text cart and close button */
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  top: 0;
+  z-index: 10; /* THis is supposed to keep it over the scrolling content */
+  padding: 0 1.25rem;
+  height: 3.187rem;
+  font-weight: 500;
+  border-bottom: solid;
+  border-color: grey;
+  border-width: .031rem;
+}
+
+#cart-close-button {
+  font-size: 1.5rem;
+  font-weight: normal;
+  background-color: rgb(250,248,240);
+  border: none;
+  color: black;
+  cursor: pointer;
+}
+
+/* Styling for item listings, scrollable space for item listings*/
+.cart-contents {
+  flex: 1;
+  overflow-y: auto; /*Allow scrolling if there are a lot of listings*/
+  overflow-x: hidden;
+}
+
+/* Styling for checkout buttons*/
+.cart-checkout-buttons {
+  bottom: 0;
+  z-index: 10; /* THis is supposed to keep it over the scrolling content */
+  display: flex;
+  flex-direction: column; /* If any additional buttons are added they will be stacked vertically. */
+  height: 3.893rem;
+}
+
+/* Styling for the checkout button */
+#cart-checkout-button {
+  width: 100%;
+  height: 100%;
+  font-size: .894em;
+  font-weight: 700;
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(36, 81, 45);
+  color: rgb(250,248,240);
+  cursor: pointer;
+}
+
+/* Applied to open and close the sidebar*/
+#cart-sidebar.open {
+  right: 0;  
+}
+
+
+
+
+/* Code for mobile*/
+@media (max-width: 600px) {
+
+  #cart-sidebar {
+    width: 100vw;
+    right: -100vw;
+    overflow-y: auto;
+    height: 100dvh; /* dvh accounts for dynamic browser ui elements especially on mobile devices*/
+  }
+
+  body.no-scroll {
+    overflow-y: auto;
+  }
+
+
+}
+
+
+
+/* index.html header code  */
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(250,248,240);
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  padding-top: 6.813rem;
+}
+
+.header {
+  display: flex;
+  padding: 0;
+  margin: 0;
+  height: 6.813rem;
+  border: 2px solid black;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
+  background-color: rgb(250,248,240); /* add this */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* optional, adds separation */
+}
+
+.header-left-logo {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  justify-content: left;
+  padding: 0;
+  margin: 0;
+}
+
+.header-left-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.header-middle-title {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.188rem;
+  padding: 0;
+  margin: 0;
+  
+}
+
+.header-right-cart {
+  flex: 1;
+  display: flex;
+  text-align: right;
+  justify-content: right;
+  align-items: center;
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+  padding-right: .938rem;
+}
+
+#cart-text-button {
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  border: none;
+  background-color: rgb(250,248,240);
+  font-size: 15px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: black;
+}
+
+
+
+/* Code for mobile*/
+@media (max-width: 600px) {
+  .header-left-logo {
+    display: none;
+  }
+
+  .header-middle-title {
+    justify-content: left;
+    padding-left: .938rem;
+  }
+
+}
