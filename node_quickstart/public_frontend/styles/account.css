@@ -1,0 +1,67 @@
+/* account.css */
+
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.login_form_container {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 320px;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  margin: auto; /* centers it within the body flex */
+}
+
+.login_form_container h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.login_form_user,
+.login_form_password {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.login_form_user label,
+.login_form_password label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555;
+}
+
+.login_form_user input,
+.login_form_password input {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+#submit_login {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#submit_login:hover {
+  background-color: #333;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>MuShoes</title>
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dasqssuki/image/upload/v1760557996/mushoes-logos/elgwnvm5khzsh94gjuyk.png">
+
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="styles/cart-sidebar.css">
+    <link rel="stylesheet" href="styles/account.css">
+
+    <!-- Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  </head>
+
+  <body>
+
+    <!-- Header -->
+
+    <div class="header">
+      <div class="header-left-logo">
+        <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1760561065/mushoes-logos/b8y7ct0o8skdtkchshkv.png" alt="">
+      </div>
+
+      <div class="header-middle-title">
+        <div class="header-title-container"><a href="index.html">MuShoes</a></div>
+        <div class="header-links-container">
+          <a href="about.html">About</a>
+          <a href="shop.html">Shop</a>
+          <a href="account.html">Account</a>
+        </div>
+      </div>
+
+      <div class="header-right-cart">
+        <button id="cart-text-button">cart (0)</button>
+      </div>
+    </div>
+
+    <!-- Login Form -->
+    <div class="login_form_container">
+  Log In
+    <div class="login_form_user">
+      <label for="user_name">User:</label>
+      <input type="text" id="user_name" name="user_name">
+    </div>
+    
+    <div class="login_form_password">
+      <label for="user_password">Password:</label>
+      <input type="text" id="user_password" name="user_password">
+    </div>
+    <input type="submit" value="Submit" id="submit_login">
+  </div>
+
+
+
+
+    <!-- code for cart -->
+    <div id="cart-sidebar">
+      <div class="cart-header">
+        Cart
+        <button id="cart-close-button">&times;</button>
+      </div>
+
+
+      <div class="cart-contents">
+      </div>
+
+
+      <div class="cart-checkout-buttons">
+        <button id="cart-checkout-button">Checkout</button>
+      </div>
+    </div>
+
+
+    <script src="/scripts/cart.js"></script>
+    
+  </body>
+
+</html>
