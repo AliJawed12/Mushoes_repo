@@ -8,6 +8,7 @@ window.onload = function() {
   openButton.addEventListener("click", () => {
     cartSideBar.classList.add("open");
     document.body.classList.add("no-scroll");
+    console.log("Opening");
   });
 
   closeButton.addEventListener("click", () => {
