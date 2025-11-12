@@ -128,6 +128,20 @@ app.get("/admin/dashboard/view_all_listings", async (req, res) => {
   }
 }); 
 
+// helper route used by shop.html to fetch all listings from MongoDB
+app.get("/fetch_all_listings", async (req, res) => {
+
+  try {
+
+    const allListings = await readAllListings();
+    res.status(200).json({message: "Listings read succesfully from MongoDB!", listings: allListings});
+  }
+  catch (err) {
+    console.error("Error while reading listings in ExpressServer.js", err);
+    res.status(500).json({message: "Server Error while reading all listings", error: err.message});
+  }
+}); 
+
 
 //---------------------
 // Running the Server
