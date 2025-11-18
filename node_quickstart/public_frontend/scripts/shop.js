@@ -72,6 +72,9 @@ function openListingFunctionality() {
     item.addEventListener("click", () => {
       const id = item.dataset.id;
       console.log(id);
+
+      // Navigate to product.html and pass the ID via query string
+      window.location.href = `product.html?id=${id}`;
     })
   })
 }
