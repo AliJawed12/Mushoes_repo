@@ -71,6 +71,10 @@ app.post("/admin/dashboard/upload_listing", upload.array("images"), async (req, 
     const listing = JSON.parse(req.body.listing);
     console.log("Server received:", listing);
 
+    // sorts images alphabetically for storage
+    req.files.sort((a, b) => a.originalname.localeCompare(b.originalname));
+
+
     // Add paths to listing.images
     listing.images = req.files.map(file => file.path);
 
