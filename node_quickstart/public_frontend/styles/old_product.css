@@ -82,31 +82,23 @@
 
 
 @media (max-width: 768px) {
-
-  
   /* Stack layout */
   .product-page {
     flex-direction: column;
     padding: 20px;
   }
 
-    .product-images {
-    flex-direction: row;            /* horizontal scroll */
-    overflow-x: auto;               /* enable swipe/scroll */
-    gap: 10px;
-    padding-bottom: 10px;
-    scroll-snap-type: x mandatory;  /* snap each image */
-    justify-content: center;        /* center images in scroll container */
+  .product-images {
+    flex-direction: row;      /* horizontal for swipe */
+    overflow-x: auto;        /* enable horizontal scroll */
+    gap: 10px;               /* space between images */
+    scroll-snap-type: x mandatory; /* optional: snap to each image */
   }
 
   .product-images img {
-    flex: 0 0 auto;                 /* prevent shrinking */
-    width: 80%;                      /* each image width */
-    height: auto;
-    scroll-snap-align: start;
-    border-radius: 12px;
-    object-fit: cover;
-    margin: 0 auto;                 /* center image inside its flex item */
+    flex: 0 0 auto;          /* prevent images from shrinking */
+    width: 80%;              /* width of each image (adjust as needed) */
+    scroll-snap-align: start; /* optional: snap start for each image */
   }
 
   .product-details {

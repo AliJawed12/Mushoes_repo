@@ -42,7 +42,7 @@ import { connectDB, mongoose } from "./schema-connection.js";
 import Shoe from "./models/Shoe.js";
 
 // import read_database to read all data from MongoDB
-import { readAllListings, deleteAListing } from './mongo_db_express_queries.js';
+import { readAllListings, deleteAListing, findAListing } from './mongo_db_express_queries.js';
 
 //----------------------------------
 // Image Processing Functionality
@@ -141,6 +141,23 @@ app.get("/fetch_all_listings", async (req, res) => {
     res.status(500).json({message: "Server Error while reading all listings", error: err.message});
   }
 }); 
+
+
+// helper route for client, in shop page, when a lisiting is clicked this method is called to display grab a products details. Afterwards HTML is generated with details and showcased
+app.post("/product", async (req, res) => {
+
+  try {
+    const mongoId = req.body.mongoID;
+    const listing = await findAListing(mongoId);
+    res.status(200).json({message: "Listing read succesfully from MongoDB!", listing: listing});
+
+  }
+  catch (err) {
+    console.error("Error while reading listing in ExpressServer.js", err);
+    res.status(500).json({message: "Server Error while reading a listing", error: err.message});
+  }
+
+});
 
 
 //---------------------

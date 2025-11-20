@@ -30,4 +30,20 @@ async function deleteAListing(listingMongoID) {
   }
 }
 
-export { readAllListings, deleteAListing };
+
+// Helper function for customer query to grab data for a listing
+// called by product.html page to showcase a shoe's details
+async function findAListing(listingMongoID) {
+
+  try {
+    const findListing = await Shoe.findOne({_id: listingMongoID});
+    console.log(findListing);
+    return findListing;
+  } 
+  catch (err) {
+    console.error("Error whileing a listing from MongoDB: (mongo_db_express_queries.js)");
+  }
+  
+}
+
+export { readAllListings, deleteAListing, findAListing };
