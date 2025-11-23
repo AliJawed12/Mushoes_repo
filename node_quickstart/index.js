@@ -44,6 +44,10 @@ import Shoe from "./models/Shoe.js";
 // import read_database to read all data from MongoDB
 import { readAllListings, deleteAListing, findAListing } from './mongo_db_express_queries.js';
 
+// import stripe
+import Stripe from 'stripe';
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
 //----------------------------------
 // Image Processing Functionality
 //----------------------------------
@@ -163,6 +167,56 @@ app.post("/product", async (req, res) => {
 
 });
 
+
+// create-checkout-session route, takes in mongodb product id, only creates checkout session for one listing, since runs when buy now is clicked
+app.post("/create-checkout-session", async (req, res) => {
+
+  // grab the mongodb id
+  try {
+    const mongoId = req.body.mongoId;
+    // grab listing data from mongodb (redoing this here in case any changes in db)
+    const listing = await findAListing(mongoId);
+
+    // if quanitiy is less than or equal to 0 then never create session 
+    if (!listing || listing.quantity <= 0) {
+      return res.status(400).json({
+        message: "This item is sold out.",
+      });
+    }
+
+    const session = await stripe.checkout.sessions.create({
+      mode: "payment",
+      payment_method_types: ["card"],
+      line_items: [
+        {
+          price_data: {
+            currency: "usd",
+            product_data: {
+              name: `${listing.brand} ${listing.name}`,
+              images: [listing.images[0]],
+              
+            },
+            unit_amount: listing.price, // price in cents
+          },
+          quantity: 1,
+        },
+      ],
+      success_url: "http://localhost:5000/success.html",
+      cancel_url: "http://localhost:5000/cancel.html",
+      metadata: {
+        mongoId,
+      },
+    });
+
+    // return the session url
+    return res.json({url: session.url});
+
+  }
+  catch (err) {
+    console.error("Error while creating checkout session", err);
+    res.status(500).json({message: "Server Errror while creating checkout session", error: err.message});
+  }
+});
 
 //---------------------
 // Running the Server
