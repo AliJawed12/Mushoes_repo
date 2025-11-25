@@ -1,0 +1,285 @@
+/* About Page Styles */
+
+.about-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* About Hero Section */
+.about-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 3rem 0;
+  margin-bottom: 4rem;
+}
+
+.about-hero-content h1 {
+  margin: 0 0 1.5rem 0;
+  color: black;
+}
+
+.about-hero-text {
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.about-hero-image {
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 0.625rem;
+  overflow: hidden;
+}
+
+.about-hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* Services Section with Accordion */
+.services-section {
+  margin-bottom: 5rem;
+}
+
+.services-section h2 {
+  text-align: center;
+  margin: 0 0 2.5rem 0;
+  color: black;
+}
+
+/* Accordion Styles */
+.accordion {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.accordion-item {
+  border: 2px solid black;
+  border-radius: 0.313rem;
+  overflow: hidden;
+  background-color: rgb(250,248,240);
+}
+
+.accordion-header {
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background-color: rgb(250,248,240);
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.accordion-header:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.accordion-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  color: black;
+}
+
+.accordion-title i {
+  color: rgb(36, 81, 45);
+}
+
+.accordion-icon {
+  color: black;
+  transition: transform 0.3s ease;
+}
+
+.accordion-item.active .accordion-icon {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 1.5rem;
+}
+
+.accordion-item.active .accordion-content {
+  max-height: 500px;
+  padding: 0 1.5rem 1.5rem 1.5rem;
+}
+
+.accordion-content p {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 1.8;
+}
+
+/* Vision Section */
+.vision-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  padding: 3rem 0;
+  margin-bottom: 5rem;
+}
+
+.vision-image {
+  width: 100%;
+  border: 2px solid black;
+  border-radius: 0.625rem;
+  overflow: hidden;
+}
+
+.vision-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.vision-content h2 {
+  margin: 0 0 1.5rem 0;
+  color: black;
+}
+
+.vision-content p {
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 1.8;
+  margin: 0 0 1.25rem 0;
+}
+
+.vision-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* Contact Section */
+.contact-section {
+  max-width: 700px;
+  margin: 0 auto 5rem auto;
+  text-align: center;
+}
+
+.contact-section h2 {
+  margin: 0 0 1rem 0;
+  color: black;
+}
+
+.contact-subtitle {
+  color: rgba(0, 0, 0, 0.7);
+  margin: 0 0 2.5rem 0;
+}
+
+.contact-form {
+  text-align: left;
+  border: 2px solid black;
+  border-radius: 0.625rem;
+  padding: 2.5rem;
+  background-color: rgb(250,248,240);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: black;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.75rem;
+  border: 2px solid black;
+  border-radius: 0.313rem;
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(250,248,240);
+  transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: rgb(36, 81, 45);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.938rem 2.5rem;
+  background-color: rgb(36, 81, 45);
+  color: rgb(250,248,240);
+  border: 2px solid black;
+  border-radius: 0.313rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.submit-button:hover {
+  background-color: rgb(28, 63, 35);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .about-hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .about-hero-image {
+    order: -1;
+  }
+
+  .vision-section {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form {
+    padding: 1.5rem;
+  }
+
+  .accordion-header {
+    padding: 1rem;
+  }
+
+  .accordion-title {
+    font-size: 0.9rem;
+  }
+
+  .accordion-content p {
+    font-size: 0.9rem;
+  }
+}

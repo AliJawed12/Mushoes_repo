@@ -12,6 +12,7 @@
     <link rel="icon" type="image/png" href="https://res.cloudinary.com/dasqssuki/image/upload/v1760557996/mushoes-logos/elgwnvm5khzsh94gjuyk.png">
 
     <link rel="stylesheet" href="styles/header-footer.css">
+    <link rel="stylesheet" href="styles/about.css">
     
 
 
@@ -44,7 +45,148 @@
       </div>
     </div>
 
-    <div>About.html</div>
+
+    <!-- Main Content -->
+    <main class="about-main">
+
+      <!-- About Section -->
+      <section class="about-hero">
+        <div class="about-hero-content">
+          <h1>About MuShoes</h1>
+          <p class="about-hero-text">
+            At MuShoes, we believe that every step tells a story. Founded with a passion for footwear excellence, 
+            we've built our reputation on three core pillars: quality, customization, and accessibility.
+          </p>
+        </div>
+        <div class="about-hero-image">
+          <img src="https://images.unsplash.com/photo-1549298916-b41d501d3772?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzbmVha2VyJTIwY29sbGVjdGlvbnxlbnwxfHx8fDE3NjQxMDExMzR8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Sneaker Collection">
+        </div>
+      </section>
+
+      <!-- Our Services Accordion -->
+      <section class="services-section">
+        <h2>What We Do</h2>
+        
+        <div class="accordion">
+          <!-- Sneaker Selling -->
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">
+                <i class="fas fa-shopping-bag"></i>
+                Sneaker Selling
+              </span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <p>
+                We curate an exclusive collection of premium sneakers from top brands and emerging designers. 
+                Our selection process is rigorous, ensuring that every pair meets our high standards for quality, 
+                style, and comfort. From classic silhouettes to limited edition releases, we bring you the best 
+                footwear from around the world. Whether you're a collector hunting for rare finds or someone 
+                looking for everyday comfort, our diverse inventory has something for everyone.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sneaker Customization -->
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">
+                <i class="fas fa-paint-brush"></i>
+                Sneaker Customization
+              </span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <p>
+                Express your unique style with our custom sneaker service. Our talented team of artists and 
+                craftspeople work with you to transform ordinary sneakers into one-of-a-kind masterpieces. 
+                From hand-painted designs and premium material swaps to complete reconstructions, we bring 
+                your vision to life. Whether you want to commemorate a special occasion, represent your brand, 
+                or simply stand out from the crowd, our customization services offer limitless possibilities.
+              </p>
+            </div>
+          </div>
+
+          <!-- Sneaker Sourcing -->
+          <div class="accordion-item">
+            <button class="accordion-header" onclick="toggleAccordion(this)">
+              <span class="accordion-title">
+                <i class="fas fa-search"></i>
+                Sneaker Sourcing
+              </span>
+              <i class="fas fa-chevron-down accordion-icon"></i>
+            </button>
+            <div class="accordion-content">
+              <p>
+                Can't find that specific pair you've been dreaming about? Our sneaker sourcing service is here 
+                to help. Leveraging our extensive network of suppliers, retailers, and collectors worldwide, 
+                we track down hard-to-find sneakers that others can't. Whether it's a vintage grail from decades 
+                past or a recent release that sold out instantly, we use our industry connections and expertise 
+                to locate and authenticate the exact sneakers you're looking for. Just tell us what you need, 
+                and we'll handle the rest.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Company Vision -->
+      <section class="vision-section">
+        <div class="vision-image">
+          <img src="https://images.unsplash.com/photo-1460353581641-37baddab0fa2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzbmVha2VyJTIwZGVzaWdufGVufDF8fHx8MTc2NDEwMTEzNHww&ixlib=rb-4.1.0&q=80&w=1080" alt="MuShoes Vision">
+        </div>
+        <div class="vision-content">
+          <h2>Our Vision</h2>
+          <p>
+            We envision a world where footwear is more than just a necessity—it's a form of self-expression, 
+            a celebration of individuality, and a testament to craftsmanship. At MuShoes, we're not just 
+            selling shoes; we're fostering a community of sneaker enthusiasts who appreciate quality, 
+            creativity, and authenticity.
+          </p>
+          <p>
+            Our commitment extends beyond commerce. We strive to make exceptional sneakers accessible while 
+            maintaining sustainable practices and supporting both established brands and up-and-coming designers. 
+            Every interaction with MuShoes should feel personal, professional, and inspiring.
+          </p>
+          <p>
+            Join us on our journey to redefine the sneaker experience—one step at a time.
+          </p>
+        </div>
+      </section>
+
+      <!-- Contact Form -->
+      <section class="contact-section">
+        <h2>Get In Touch</h2>
+        <p class="contact-subtitle">Have questions or want to learn more? We'd love to hear from you!</p>
+        
+        <form class="contact-form" id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Name *</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <input type="text" id="subject" name="subject" required>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
+
+          <button type="submit" class="submit-button">Send Message</button>
+        </form>
+      </section>
+
+    </main>
 
     <!-- Footer -->
     <div class="footer">
@@ -62,7 +204,7 @@
       </div>
 
       <div class="footer-right">
-        <p>&copy; 2024 MuShoes. All rights reserved.</p>
+        <p>&copy; 2025 MuShoes. All rights reserved.</p>
       </div>
     </div>
 
@@ -84,6 +226,7 @@
 
 
     <script src="/scripts/header-footer.js"></script>
+    <script src="/scripts/about.js"></script>
     
   </body>
 
