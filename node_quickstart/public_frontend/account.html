@@ -11,8 +11,7 @@
     <title>MuShoes</title>
     <link rel="icon" type="image/png" href="https://res.cloudinary.com/dasqssuki/image/upload/v1760557996/mushoes-logos/elgwnvm5khzsh94gjuyk.png">
 
-    <link rel="stylesheet" href="styles/index.css">
-    <link rel="stylesheet" href="styles/cart-sidebar.css">
+    <link rel="stylesheet" href="styles/header-footer.css">
     <link rel="stylesheet" href="styles/account.css">
 
     <!-- Fonts -->
@@ -28,7 +27,6 @@
   <body>
 
     <!-- Header -->
-
     <div class="header">
       <div class="header-left-logo">
         <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1760561065/mushoes-logos/b8y7ct0o8skdtkchshkv.png" alt="">
@@ -36,15 +34,12 @@
 
       <div class="header-middle-title">
         <div class="header-title-container"><a href="index.html">MuShoes</a></div>
-        <div class="header-links-container">
-          <a href="about.html">About</a>
-          <a href="shop.html">Shop</a>
-          <a href="account.html">Account</a>
-        </div>
       </div>
 
-      <div class="header-right-cart">
-        <button id="cart-text-button">cart (0)</button>
+      <div class="header-right-menu">
+        <button id="menu-button">
+          <i class="fas fa-bars"></i>
+        </button>
       </div>
     </div>
 
@@ -66,28 +61,48 @@
     </div>
 
 
-
-
-
-    <!-- code for cart -->
-    <div id="cart-sidebar">
-      <div class="cart-header">
-        Cart
-        <button id="cart-close-button">&times;</button>
+        
+    <!-- Hamburger Menu Sidebar -->
+    <div id="menu-sidebar">
+      <div class="menu-header">
+        Menu
+        <button id="menu-close-button">&times;</button>
       </div>
 
-
-      <div class="cart-contents">
-      </div>
-
-
-      <div class="cart-checkout-buttons">
-        <button id="cart-checkout-button">Checkout</button>
+      <div class="menu-contents">
+        <a href="index.html" class="menu-link">Home</a>
+        <a href="about.html" class="menu-link">About</a>
+        <a href="shop.html" class="menu-link">Shop</a>
+        <a href="account.html" class="menu-link">Account</a>
       </div>
     </div>
 
 
-    <script src="/scripts/cart.js"></script>
+    <!-- REUSABLE FOOTER - Copy this into your pages -->
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-left">
+        <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1760561065/mushoes-logos/b8y7ct0o8skdtkchshkv.png" alt="MuShoes Logo">
+      </div>
+
+      <div class="footer-middle">
+        <div class="footer-title">MuShoes</div>
+        <div class="footer-links">
+          <a href="about.html">About</a>
+          <a href="shop.html">Shop</a>
+          <a href="account.html">Account</a>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <p>&copy; 2025 MuShoes. All rights reserved.</p>
+      </div>
+    </div>
+
+
+
+    <script src="/scripts/hamburger-menu.js"></script>
     <script src="/scripts/account.js"></script>
     
   </body>

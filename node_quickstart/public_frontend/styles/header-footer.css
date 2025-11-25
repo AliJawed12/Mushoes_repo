@@ -1,6 +1,20 @@
 /* HEADER AND FOOTER REUSABLE STYLES */
 
 /* ============================ */
+/* UNIVERSAL BODY STYLES */
+/* ============================ */
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(250,248,240);
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  padding-top: 6.813rem; /* CRITICAL: Prevents content from going under fixed header */
+}
+
+
+/* ============================ */
 /* HEADER STYLES */
 /* ============================ */
 
@@ -19,7 +33,6 @@
   right: 0;
   z-index: 1000;
   background-color: rgb(250,248,240);
-  font-family: 'Montserrat', sans-serif;
 }
 
 .header-left-logo {
@@ -180,7 +193,6 @@
   background-color: rgb(250,248,240);
   margin-top: 4rem;
   align-items: center;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .footer-left {
@@ -259,7 +271,9 @@
   }
 
   .header-middle-title {
-    justify-content: left;
+    flex: 2; /* Take up more space since left logo is hidden */
+    justify-content: center; /* Keep vertical centering */
+    align-items: flex-start; /* Align to left horizontally */
     padding-left: .938rem;
   }
 
