@@ -1,11 +1,8 @@
-body {
-  font-family: 'Montserrat', sans-serif;
-  background-color: rgb(250,248,240);
-  padding: 0;
-  margin: 0;
-  overflow-x: hidden;
-  padding-top: 6.813rem;
-}
+/* HEADER AND FOOTER REUSABLE STYLES */
+
+/* ============================ */
+/* HEADER STYLES */
+/* ============================ */
 
 .header {
   display: flex;
@@ -22,6 +19,7 @@ body {
   right: 0;
   z-index: 1000;
   background-color: rgb(250,248,240);
+  font-family: 'Montserrat', sans-serif;
 }
 
 .header-left-logo {
@@ -90,77 +88,88 @@ body {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-/* Hero Section Styles */
-.hero-section {
+
+/* ============================ */
+/* HAMBURGER MENU STYLES */
+/* ============================ */
+
+/* General Styling */
+#menu-sidebar {
+  position: fixed;           /* Fix the menu on the screen */
+  top: 0;                    /* Place it at the top of the viewport */
+  right: -26.875rem;         /* Start hidden off-screen */
+  width: 26.875rem;          /* Set width */
+  height: 100vh;             /* Take full height of the viewport */
+  background-color: rgb(250,248,240);
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.5);
+  transition: right 0.3s ease-in-out;  /* Smooth transition for sliding effect */
+  z-index: 9999;             /* Ensure it's above other elements */
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: 3rem 1.25rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
 }
 
-.hero-image-container {
-  width: 100%;
-  max-width: 50rem;
-  margin-bottom: 2.5rem;
-  border: 2px solid black;
-  overflow: hidden;
-  border-radius: 0.625rem;
-}
-
-.hero-image-container img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: cover;
-}
-
-.hero-content {
-  text-align: center;
+/* Styling for the header of menu which includes text Menu and close button */
+.menu-header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  gap: 1.25rem;
-}
-
-.hero-text {
-  font-size: 1.5rem;
+  top: 0;
+  z-index: 10; /* This is supposed to keep it over the scrolling content */
+  padding: 0 1.25rem;
+  height: 3.187rem;
   font-weight: 500;
+  border-bottom: solid;
+  border-color: grey;
+  border-width: .031rem;
+}
+
+#menu-close-button {
+  font-size: 1.5rem;
+  font-weight: normal;
+  background-color: rgb(250,248,240);
+  border: none;
   color: black;
-  margin: 0;
-  padding: 0;
-}
-
-.hero-subtext {
-  font-size: 1.125rem;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.7);
-  margin: 0;
-  padding: 0;
-}
-
-.hero-button {
-  padding: 0.938rem 2.5rem;
-  background-color: rgb(36, 81, 45);
-  color: rgb(250,248,240);
-  text-decoration: none;
-  font-size: 1rem;
-  font-weight: 600;
-  border: 2px solid black;
-  border-radius: 0.313rem;
-  transition: all 0.2s ease;
   cursor: pointer;
-  display: inline-block;
 }
 
-.hero-button:hover {
-  background-color: rgb(28, 63, 35);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+/* Styling for menu contents*/
+.menu-contents {
+  flex: 1;
+  overflow-y: auto; /*Allow scrolling if there are a lot of listings*/
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 0;
 }
 
-/* Footer Styles */
+/* Styling for individual menu links */
+.menu-link {
+  padding: 1.25rem 1.875rem;
+  text-decoration: none;
+  color: black;
+  font-size: 1.125rem;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease;
+}
+
+.menu-link:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Applied to open and close the sidebar*/
+#menu-sidebar.open {
+  right: 0;  
+}
+
+
+/* ============================ */
+/* FOOTER STYLES */
+/* ============================ */
+
 .footer {
   display: flex;
   padding: 2.5rem 1.25rem;
@@ -171,6 +180,7 @@ body {
   background-color: rgb(250,248,240);
   margin-top: 4rem;
   align-items: center;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .footer-left {
@@ -237,8 +247,13 @@ body {
   margin: 0;
 }
 
-/* Code for mobile*/
+
+/* ============================ */
+/* MOBILE RESPONSIVE */
+/* ============================ */
+
 @media (max-width: 600px) {
+  /* Header mobile */
   .header-left-logo {
     display: none;
   }
@@ -248,18 +263,19 @@ body {
     padding-left: .938rem;
   }
 
-  .hero-section {
-    padding: 2rem 1rem;
+  /* Menu mobile */
+  #menu-sidebar {
+    width: 100vw;
+    right: -100vw;
+    overflow-y: auto;
+    height: 100dvh; /* dvh accounts for dynamic browser ui elements especially on mobile devices*/
   }
 
-  .hero-text {
-    font-size: 1.25rem;
+  body.no-scroll {
+    overflow-y: auto;
   }
 
-  .hero-subtext {
-    font-size: 1rem;
-  }
-
+  /* Footer mobile */
   .footer {
     flex-direction: column;
     gap: 1.5rem;
