@@ -1,67 +1,240 @@
-/* account.css */
+/* Account Page Styles - MuShoes Theme */
 
 body {
   font-family: "Montserrat", sans-serif;
   margin: 0;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
+  background-color: rgb(250,248,240);
 }
 
-.login_form_container {
-  background-color: #ffffff;
+.account-main {
+  min-height: calc(100vh - 6.813rem - 200px);
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 320px;
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  margin: auto; /* centers it within the body flex */
+  justify-content: center;
+  padding: 3rem 1.25rem;
 }
 
-.login_form_container h2 {
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  color: #333;
+/* Auth Container */
+.auth-container {
+  width: 100%;
+  max-width: 450px;
+  background-color: rgb(250,248,240);
+  border: 2px solid black;
+  border-radius: 0.625rem;
+  overflow: hidden;
 }
 
-.login_form_user,
-.login_form_password {
+/* Tab Navigation */
+.auth-tabs {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin-bottom: 1rem;
+  border-bottom: 2px solid black;
 }
 
-.login_form_user label,
-.login_form_password label {
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #555;
-}
-
-.login_form_user input,
-.login_form_password input {
-  padding: 0.6rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-}
-
-#submit_login {
-  width: 100%;
-  padding: 0.75rem;
-  background-color: #000;
-  color: #fff;
+.auth-tab {
+  flex: 1;
+  padding: 1.25rem;
+  background-color: rgb(250,248,240);
   border: none;
-  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s ease;
+  color: rgba(0, 0, 0, 0.6);
+  position: relative;
 }
 
-#submit_login:hover {
-  background-color: #333;
+.auth-tab:first-child {
+  border-right: 2px solid black;
+}
+
+.auth-tab:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.auth-tab.active {
+  background-color: rgb(36, 81, 45);
+  color: rgb(250,248,240);
+}
+
+/* Form Wrapper */
+.auth-form-wrapper {
+  display: none;
+  padding: 2.5rem;
+}
+
+.auth-form-wrapper.active {
+  display: block;
+}
+
+.auth-form-wrapper h2 {
+  margin: 0 0 0.5rem 0;
+  color: black;
+  text-align: center;
+}
+
+.form-subtitle {
+  text-align: center;
+  color: rgba(0, 0, 0, 0.7);
+  margin: 0 0 2rem 0;
+}
+
+/* Form Groups */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: black;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid black;
+  border-radius: 0.313rem;
+  font-family: 'Montserrat', sans-serif;
+  background-color: rgb(250,248,240);
+  transition: border-color 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: rgb(36, 81, 45);
+}
+
+.form-group input::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+/* Submit Button */
+.auth-submit-btn {
+  width: 100%;
+  padding: 0.938rem;
+  background-color: rgb(36, 81, 45);
+  color: rgb(250,248,240);
+  border: 2px solid black;
+  border-radius: 0.313rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 0.5rem;
+}
+
+.auth-submit-btn:hover {
+  background-color: rgb(28, 63, 35);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Footer Text */
+.form-footer-text {
+  text-align: center;
+  margin: 1.5rem 0 0 0;
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.form-footer-text a {
+  color: rgb(36, 81, 45);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.form-footer-text a:hover {
+  text-decoration: underline;
+}
+
+/* Confirmation Container */
+.confirmation-container {
+  width: 100%;
+  max-width: 550px;
+  background-color: rgb(250,248,240);
+  border: 2px solid black;
+  border-radius: 0.625rem;
+  padding: 3rem 2.5rem;
+  text-align: center;
+}
+
+.confirmation-icon {
+  width: 6.25rem;
+  height: 6.25rem;
+  border-radius: 50%;
+  background-color: rgb(36, 81, 45);
+  color: rgb(250,248,240);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem auto;
+  border: 3px solid black;
+}
+
+.confirmation-icon i {
+  font-size: 3rem;
+}
+
+.confirmation-container h2 {
+  margin: 0 0 1rem 0;
+  color: black;
+}
+
+.confirmation-message {
+  color: black;
+  margin: 0 0 0.75rem 0;
+  line-height: 1.6;
+}
+
+.confirmation-message span {
+  font-weight: 600;
+  color: rgb(36, 81, 45);
+}
+
+.confirmation-submessage {
+  color: rgba(0, 0, 0, 0.7);
+  margin: 0 0 2rem 0;
+  line-height: 1.6;
+}
+
+/* Error Message Styling */
+.error-message {
+  background-color: rgba(200, 50, 50, 0.1);
+  border: 2px solid rgba(200, 50, 50, 0.5);
+  color: rgb(150, 30, 30);
+  padding: 0.75rem;
+  border-radius: 0.313rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+  .account-main {
+    padding: 2rem 1rem;
+  }
+
+  .auth-form-wrapper {
+    padding: 2rem 1.5rem;
+  }
+
+  .confirmation-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .auth-tab {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .confirmation-icon {
+    width: 5rem;
+    height: 5rem;
+  }
+
+  .confirmation-icon i {
+    font-size: 2.5rem;
+  }
 }
