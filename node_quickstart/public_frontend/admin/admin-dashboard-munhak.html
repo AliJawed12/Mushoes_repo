@@ -8,8 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>MuShoes</title>
+    <title>Admin Dashboard - MuShoes</title>
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dasqssuki/image/upload/v1760557996/mushoes-logos/elgwnvm5khzsh94gjuyk.png">
    
+    <link rel="stylesheet" href="/styles/header-footer.css">
     <link rel="stylesheet" href="/styles/admin-listings.css">
     <link rel="stylesheet" href="/styles/admin-all-listings.css">
     
@@ -27,74 +29,144 @@
   <body>
 
     <!-- Header -->
+    <div class="header">
+      <div class="header-left-logo">
+        <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1760561065/mushoes-logos/b8y7ct0o8skdtkchshkv.png" alt="">
+      </div>
 
+      <div class="header-middle-title">
+        <div class="header-title-container"><a href="/index.html">MuShoes</a></div>
+      </div>
 
-    <!-- Code for product entries -->
-
-    <div id="admin_operations">
-      <label for="admin_operation">Select an operation:</label>
-      <select name="admin_operation" id="admin_operation" required>
-        <option value="">Select Operation</option>
-        <option value="Upload Listing">Upload Listing</option>
-        <option value="Delete Listing">Delete Listing</option>
-      </select>
-
+      <div class="header-right-menu">
+        <button id="menu-button">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
     </div>
 
-    <!-- Code for product entries -->
-    <div id="upload_listing" class="upload_listing_style hide_form">
+    <!-- Hamburger Menu Sidebar -->
+    <div id="menu-sidebar">
+      <div class="menu-header">
+        Menu
+        <button id="menu-close-button">&times;</button>
+      </div>
 
-      <label for="shoe_name">Shoe Name: </label>
-      <input type="text" name="name" id="shoe_name" required>
-
-      <label for="shoe_brand">Shoe Brand: </label>
-      <input type="text" name="brand" id="shoe_brand" required>
-
-      <label for="shoe_size">Shoe Size: </label>
-      <input type="number" name="size" id="shoe_size" required>
-
-      <label for="gender">Gender (M | F): </label>
-      <input type="text" maxlength="1" name="gender" id="gender" required pattern="[MF]">
-
-      <label for="shoe_color">Shoe Color(s): </label>
-      <input type="text" name="color" id="shoe_color" placeholder="Separate multiple colors with commas">
-
-      <label for="condition">Condition: </label>
-      <select name="condition" id="condition" required>
-        <option value="">Select condition</option>
-        <option value="New">New</option>
-        <option value="Used">Used</option>
-        <option value="Like New">Like New</option>
-      </select>
-
-      <label for="price">Price (cents): </label>
-      <input type="number" name="price" id="price" required step="0.01">
-
-      <label for="stock">Stock Quantity: </label>
-      <input type="number" name="stock" id="stock" required>
-
-      <label for="description">Description: </label>
-      <textarea name="description" id="description" rows="4"></textarea>
-
-      <label for="images">Images: </label>
-      <input type="file" id="shoe_images" multiple accept="image/*">
-
-      <button type="submit" id="submit_button">Add Shoe</button>
-
+      <div class="menu-contents">
+        <a href="/index.html" class="menu-link">Home</a>
+        <a href="/about.html" class="menu-link">About</a>
+        <a href="/shop.html" class="menu-link">Shop</a>
+        <a href="/account.html" class="menu-link">Account</a>
+      </div>
     </div>
 
-    <!-- Code for Product Deletion --> 
-     <div id="delete_listing" class="delete_listing_styles hide_form">
-      <div class="shop-rows products-grid"></div>
-     </div>
+    <!-- Admin Dashboard Content -->
+    <main class="admin-main-content">
+      
+      <!-- Dashboard Title -->
+      <div class="admin-dashboard-header">
+        <h1>Admin Dashboard</h1>
+        <p class="admin-subtitle">Manage your MuShoes inventory</p>
+      </div>
 
+      <!-- Code for product entries -->
+      <div id="admin_operations">
+        <label for="admin_operation">Select an operation:</label>
+        <select name="admin_operation" id="admin_operation" required>
+          <option value="">Select Operation</option>
+          <option value="Upload Listing">Upload Listing</option>
+          <option value="Delete Listing">Delete Listing</option>
+        </select>
+      </div>
 
-    
+      <!-- Code for product entries -->
+      <div id="upload_listing" class="upload_listing_style hide_form">
 
+        <label for="shoe_name">Shoe Name: </label>
+        <input type="text" name="name" id="shoe_name" required>
 
-    <!-- code for cart -->
+        <label for="shoe_brand">Shoe Brand: </label>
+        <input type="text" name="brand" id="shoe_brand" required>
 
-    <!-- <script src="scripts/cart.js"></script> -->
+        <label for="shoe_size">Shoe Size: </label>
+        <input type="number" name="size" id="shoe_size" required>
+
+        <label for="gender">Gender (M | F): </label>
+        <input type="text" maxlength="1" name="gender" id="gender" required pattern="[MF]">
+
+        <label for="shoe_color">Shoe Color(s): </label>
+        <input type="text" name="color" id="shoe_color" placeholder="Separate multiple colors with commas">
+
+        <label for="condition">Condition: </label>
+        <select name="condition" id="condition" required>
+          <option value="">Select condition</option>
+          <option value="New">New</option>
+          <option value="Used">Used</option>
+          <option value="Like New">Like New</option>
+        </select>
+
+        <label for="price">Price (cents): </label>
+        <input type="number" name="price" id="price" required step="0.01">
+
+        <label for="stock">Stock Quantity: </label>
+        <input type="number" name="stock" id="stock" required>
+
+        <label for="description">Description: </label>
+        <textarea name="description" id="description" rows="4"></textarea>
+
+        <label for="images">Images: </label>
+        <input type="file" id="shoe_images" multiple accept="image/*">
+
+        <button type="submit" id="submit_button">Add Shoe</button>
+
+      </div>
+
+      <!-- Code for Product Deletion --> 
+      <div id="delete_listing" class="delete_listing_styles hide_form">
+        <div class="shop-rows products-grid"></div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <div class="footer">
+      <div class="footer-left">
+        <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1760561065/mushoes-logos/b8y7ct0o8skdtkchshkv.png" alt="MuShoes Logo">
+      </div>
+
+      <div class="footer-middle">
+        <div class="footer-title">MuShoes</div>
+        <div class="footer-links">
+          <a href="/about.html">About</a>
+          <a href="/shop.html">Shop</a>
+          <a href="/account.html">Account</a>
+        </div>
+      </div>
+
+      <div class="footer-right">
+        <p>&copy; 2025 MuShoes. All rights reserved.</p>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmationModal" class="confirmation-modal">
+      <div class="confirmation-modal-content">
+        <div class="confirmation-modal-header">
+          <div class="confirmation-modal-icon" id="modalIcon">
+            <i class="fas fa-check" id="modalIconSymbol"></i>
+          </div>
+          <h3 id="modalTitle">Success</h3>
+        </div>
+        <div class="confirmation-modal-body" id="modalBody">
+          <!-- Dynamic content will be inserted here -->
+        </div>
+        <div class="confirmation-modal-footer">
+          <button class="confirmation-modal-button primary" id="modalCloseButton">OK</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="/scripts/header-footer.js"></script>
     <script src="/scripts/admin-dashboard-scripts.js"></script>
     
   </body>
