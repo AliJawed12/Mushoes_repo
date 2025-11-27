@@ -201,8 +201,8 @@ app.post("/create-checkout-session", async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: "http://localhost:5000/success.html",
-      cancel_url: "http://localhost:5000/cancel.html",
+      success_url: "http://192.168.1.16:5000/success.html",
+      cancel_url: "http://192.168.1.16:5000/cancel.html",
       metadata: {
         mongoId,
       },

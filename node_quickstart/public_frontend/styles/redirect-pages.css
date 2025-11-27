@@ -80,6 +80,7 @@
   transition: all 0.2s ease;
   cursor: pointer;
   display: inline-block;
+  box-sizing: border-box; /* Ensures button size up and down relative to container */
 }
 
 .primary-button {

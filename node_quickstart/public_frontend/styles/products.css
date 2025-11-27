@@ -1,5 +1,3 @@
-
-
 /* Main Product Page Layout */
 .product-page {
   display: flex;
@@ -53,6 +51,10 @@
   color: #24512d;
 }
 
+.product-size {
+  font-size: 1rem;
+}
+
 .product-condition {
   font-size: 1rem;
   font-style: italic;
@@ -78,11 +80,23 @@
   border: none;
   border-radius: 12px;
   cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
+#add-to-cart-button:hover {
+  background-color: #1a3d22;
+  transform: translateY(-2px);
+}
+
+#add-to-cart-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
 
 @media (max-width: 768px) {
-
   
   /* Stack layout */
   .product-page {
@@ -90,28 +104,50 @@
     padding: 20px;
   }
 
-    .product-images {
+  .product-images {
     flex-direction: row;            /* horizontal scroll */
     overflow-x: auto;               /* enable swipe/scroll */
     gap: 10px;
     padding-bottom: 10px;
     scroll-snap-type: x mandatory;  /* snap each image */
-    justify-content: center;        /* center images in scroll container */
+    
+    /* Hide scrollbar for cleaner look */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+  }
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .product-images::-webkit-scrollbar {
+    display: none;
   }
 
   .product-images img {
     flex: 0 0 auto;                 /* prevent shrinking */
-    width: 80%;                      /* each image width */
+    width: 90%;                     /* each image takes 90% of container width */
     height: auto;
-    scroll-snap-align: start;
+    scroll-snap-align: center;      /* snap to center for smooth feel */
     border-radius: 12px;
     object-fit: cover;
-    margin: 0 auto;                 /* center image inside its flex item */
+  }
+
+  /* Make first image align to start */
+  .product-images img:first-child {
+    margin-left: 5%;                /* centers the first image nicely */
+  }
+
+  /* Add padding to last image so it can scroll fully into view */
+  .product-images img:last-child {
+    margin-right: 5%;
   }
 
   .product-details {
     position: relative; /* remove sticky for mobile */
     top: auto;
     margin-top: 20px;
+  }
+
+  #add-to-cart-button {
+    width: 100%;
   }
 }

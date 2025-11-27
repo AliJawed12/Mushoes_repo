@@ -29,8 +29,8 @@
 
 .about-hero-image {
   width: 100%;
-  border: 2px solid black;
-  border-radius: 0.625rem;
+  /* border: 2px solid black;
+  border-radius: 0.625rem; Adds border around image*/
   overflow: hidden;
 }
 
@@ -136,8 +136,8 @@
 
 .vision-image {
   width: 100%;
-  border: 2px solid black;
-  border-radius: 0.625rem;
+  /* border: 2px solid black;
+  border-radius: 0.625rem; Adds black border around image */
   overflow: hidden;
 }
 
