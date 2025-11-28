@@ -3,15 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Account - MuShoes</title>
-    <link rel="stylesheet" href="styles/globals.css">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Account - MuShoes</title>
+    <link rel="icon" type="image/png" href="https://res.cloudinary.com/dasqssuki/image/upload/v1760557996/mushoes-logos/elgwnvm5khzsh94gjuyk.png">
+
     <link rel="stylesheet" href="styles/header-footer.css">
     <link rel="stylesheet" href="styles/customer-account.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Fonts -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Header Component -->
-    <div id="header-container"></div>
+
+    <!-- Header -->
+    <div class="header">
+    <div class="header-left-logo">
+        <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1760561065/mushoes-logos/b8y7ct0o8skdtkchshkv.png" alt="">
+    </div>
+
+    <div class="header-middle-title">
+        <div class="header-title-container"><a href="index.html">MuShoes</a></div>
+    </div>
+
+    <div class="header-right-menu">
+        <button id="menu-button">
+        <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    </div>
+
+    <!-- Hamburger Menu Sidebar -->
+    <div id="menu-sidebar">
+    <div class="menu-header">
+        Menu
+        <button id="menu-close-button">&times;</button>
+    </div>
+
+    <div class="menu-contents">
+        <a href="index.html" class="menu-link">Home</a>
+        <a href="about.html" class="menu-link">About</a>
+        <a href="shop.html" class="menu-link">Shop</a>
+        <a href="account.html" class="menu-link">Account</a>
+    </div>
+    </div>
+
+
+
 
     <main class="customer-account-page">
         <div class="account-container">
@@ -47,16 +90,16 @@
                     </div>
                     <div class="order-items">
                         <div class="order-item">
-                            <img src="https://via.placeholder.com/100" alt="Nike Air Max 90" class="order-item-image">
+                            <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1764276489/mushoes-shoe-inventory/yozpnuyqirlzbvbihc8z.png" alt="" class="order-item-image">
                             <div class="order-item-details">
-                                <h4>Nike Air Max 90</h4>
+                                <h4>Nike SB Air Max 95 x Eric Koston</h4>
                                 <p>Size: 10.5 | Condition: New</p>
-                                <p class="item-price">$120.00</p>
+                                <p class="item-price">$190.00</p>
                             </div>
                         </div>
                     </div>
                     <div class="order-footer">
-                        <span class="order-total">Total: $120.00</span>
+                        <span class="order-total">Total: $190.00</span>
                         <button class="view-order-btn" data-order-id="12345">View Details</button>
                     </div>
                 </div>
@@ -72,24 +115,24 @@
                     </div>
                     <div class="order-items">
                         <div class="order-item">
-                            <img src="https://via.placeholder.com/100" alt="Adidas Ultraboost" class="order-item-image">
+                            <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1764190731/mushoes-shoe-inventory/pfiytf5cnduoh1dwnujo.png" alt="" class="order-item-image">
                             <div class="order-item-details">
-                                <h4>Adidas Ultraboost 22</h4>
+                                <h4>Nike Air Force 3 Low X Nigo</h4>
                                 <p>Size: 11 | Condition: Like New</p>
-                                <p class="item-price">$95.00</p>
+                                <p class="item-price">$170.00</p>
                             </div>
                         </div>
                         <div class="order-item">
-                            <img src="https://via.placeholder.com/100" alt="Jordan 1 Retro" class="order-item-image">
+                            <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1764278517/mushoes-shoe-inventory/ri26rxoyzbsqgpwfcr1r.png" alt="" class="order-item-image">
                             <div class="order-item-details">
-                                <h4>Jordan 1 Retro High</h4>
+                                <h4>Adidas Anthony Edwards 2</h4>
                                 <p>Size: 10.5 | Condition: Used</p>
-                                <p class="item-price">$180.00</p>
+                                <p class="item-price">$130.00</p>
                             </div>
                         </div>
                     </div>
                     <div class="order-footer">
-                        <span class="order-total">Total: $275.00</span>
+                        <span class="order-total">Total: $300.00</span>
                         <button class="view-order-btn" data-order-id="12344">View Details</button>
                     </div>
                 </div>
@@ -105,16 +148,16 @@
                     </div>
                     <div class="order-items">
                         <div class="order-item">
-                            <img src="https://via.placeholder.com/100" alt="Yeezy Boost 350" class="order-item-image">
+                            <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1764278517/mushoes-shoe-inventory/ri26rxoyzbsqgpwfcr1r.png" alt="" class="order-item-image">
                             <div class="order-item-details">
-                                <h4>Yeezy Boost 350 V2</h4>
+                                <h4>Adidas Anthony Edwards 2</h4>
                                 <p>Size: 11 | Condition: New</p>
-                                <p class="item-price">$250.00</p>
+                                <p class="item-price">$130.00</p>
                             </div>
                         </div>
                     </div>
                     <div class="order-footer">
-                        <span class="order-total">Total: $250.00</span>
+                        <span class="order-total">Total: $130.00</span>
                         <button class="view-order-btn" data-order-id="12343">View Details</button>
                     </div>
                 </div>
@@ -157,11 +200,11 @@
                     <!-- Wishlist Item 1 -->
                     <div class="wishlist-item" data-product-id="101">
                         <button class="remove-wishlist-btn" data-product-id="101" title="Remove from wishlist">×</button>
-                        <img src="https://via.placeholder.com/300" alt="New Balance 550" class="wishlist-image">
+                        <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1764289406/shai-christmas-1-Photoroom_vcsfzw.png" alt="" class="wishlist-image">
                         <div class="wishlist-details">
-                            <span class="wishlist-brand">New Balance</span>
-                            <h4 class="wishlist-name">550 White Green</h4>
-                            <p class="wishlist-price">$110.00</p>
+                            <span class="wishlist-brand">Converse</span>
+                            <h4 class="wishlist-name">SHAI 001</h4>
+                            <p class="wishlist-price">$130.00</p>
                             <button class="view-product-btn" data-product-id="101">View Product</button>
                         </div>
                     </div>
@@ -169,38 +212,18 @@
                     <!-- Wishlist Item 2 -->
                     <div class="wishlist-item" data-product-id="102">
                         <button class="remove-wishlist-btn" data-product-id="102" title="Remove from wishlist">×</button>
-                        <img src="https://via.placeholder.com/300" alt="Converse Chuck 70" class="wishlist-image">
+                        <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1764278646/mushoes-shoe-inventory/wl1hdhlmfibvpsiubkmx.png" alt="" class="wishlist-image">
                         <div class="wishlist-details">
-                            <span class="wishlist-brand">Converse</span>
-                            <h4 class="wishlist-name">Chuck 70 High Top Black</h4>
-                            <p class="wishlist-price">$85.00</p>
+                            <span class="wishlist-brand">On</span>
+                            <h4 class="wishlist-name">Cloud 6</h4>
+                            <p class="wishlist-price">$160.00</p>
                             <button class="view-product-btn" data-product-id="102">View Product</button>
                         </div>
                     </div>
 
-                    <!-- Wishlist Item 3 -->
-                    <div class="wishlist-item" data-product-id="103">
-                        <button class="remove-wishlist-btn" data-product-id="103" title="Remove from wishlist">×</button>
-                        <img src="https://via.placeholder.com/300" alt="Vans Old Skool" class="wishlist-image">
-                        <div class="wishlist-details">
-                            <span class="wishlist-brand">Vans</span>
-                            <h4 class="wishlist-name">Old Skool Classic</h4>
-                            <p class="wishlist-price">$65.00</p>
-                            <button class="view-product-btn" data-product-id="103">View Product</button>
-                        </div>
-                    </div>
+                    
 
-                    <!-- Wishlist Item 4 -->
-                    <div class="wishlist-item" data-product-id="104">
-                        <button class="remove-wishlist-btn" data-product-id="104" title="Remove from wishlist">×</button>
-                        <img src="https://via.placeholder.com/300" alt="ASICS Gel-Lyte III" class="wishlist-image">
-                        <div class="wishlist-details">
-                            <span class="wishlist-brand">ASICS</span>
-                            <h4 class="wishlist-name">Gel-Lyte III OG</h4>
-                            <p class="wishlist-price">$130.00</p>
-                            <button class="view-product-btn" data-product-id="104">View Product</button>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <div class="no-wishlist" style="display: none;">
@@ -289,7 +312,30 @@
         </div>
     </div>
 
-    <script src="scripts/header-footer.js"></script>
+
+    
+    <!-- Footer -->
+    <div class="footer">
+    <div class="footer-left">
+        <img src="https://res.cloudinary.com/dasqssuki/image/upload/v1760561065/mushoes-logos/b8y7ct0o8skdtkchshkv.png" alt="MuShoes Logo">
+    </div>
+
+    <div class="footer-middle">
+        <div class="footer-title">MuShoes</div>
+        <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="shop.html">Shop</a>
+        <a href="account.html">Account</a>
+        </div>
+    </div>
+
+    <div class="footer-right">
+        <p>&copy; 2025 MuShoes. All rights reserved.</p>
+    </div>
+    </div>
+
+
+    <script src="scripts/hamburger-menu.js"></script>
     <script src="scripts/customer-account.js"></script>
 </body>
 </html>
