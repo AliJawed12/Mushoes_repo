@@ -218,6 +218,39 @@ app.post("/create-checkout-session", async (req, res) => {
   }
 });
 
+
+app.post("/admin-login", (req, res) => {
+  try {
+    const username = req.body.admin_user;
+    const password = req.body.admin_password;
+
+    if (username === process.env.ADMIN_USER &&
+        password === process.env.ADMIN_PASS) {
+
+      return res.json({
+        success: true,
+        url: "/admin/admin-dashboard-munhak.html"
+      });
+    }
+
+    // else always serve basic customer account html
+    return res.json({
+      success: true,
+      url: "/customer-account.html"
+    });
+
+   
+
+  } catch (err) {
+    console.error("Admin login error:", err);
+    return res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
+  }
+});
+
+
 //---------------------
 // Running the Server
 //---------------------

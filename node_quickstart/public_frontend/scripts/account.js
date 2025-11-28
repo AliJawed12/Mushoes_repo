@@ -40,6 +40,7 @@ function switchTab(tab) {
   clearErrorMessages();
 }
 
+/*
 // Handle login form submission
 function handleLogin(e) {
   e.preventDefault();
@@ -72,6 +73,62 @@ function handleLogin(e) {
 
   return true;
 }
+  */
+
+
+// Handle login form submission
+async function handleLogin(e) {
+  e.preventDefault();
+
+  // Clear previous error messages
+  clearErrorMessages();
+
+  const username = $id("login_username").value.trim();
+  const password = $id("login_password").value;
+
+  // Validation
+  if (!username) {
+    showError("login", "Please enter your username or email.");
+    return false;
+  }
+
+  if (!password) {
+    showError("login", "Please enter your password.");
+    return false;
+  }
+
+  // Debug
+  console.log("Login attempt:", { username, password: "***" });
+
+  // --- SEND REQUEST TO /admin-login ---
+  try {
+    const res = await fetch("/admin-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        admin_user: username,
+        admin_password: password
+      })
+    });
+
+    const data = await res.json();
+
+    if (res.ok && data.url) {
+      // Successful login → redirect
+      window.location.href = data.url;
+    } else {
+      // Server rejected credentials
+      showError("login", data.message || "Login failed");
+    }
+
+  } catch (err) {
+    console.error("Error:", err);
+    showError("login", "Server error. Please try again.");
+  }
+
+  return true;
+}
+
 
 // Handle registration form submission
 function handleRegister(e) {

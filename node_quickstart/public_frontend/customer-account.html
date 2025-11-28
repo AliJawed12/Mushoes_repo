@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - MuShoes</title>
+    <link rel="stylesheet" href="styles/globals.css">
+    <link rel="stylesheet" href="styles/header-footer.css">
+    <link rel="stylesheet" href="styles/customer-account.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
+    <main class="customer-account-page">
+        <div class="account-container">
+            
+            <!-- Page Header -->
+            <div class="account-header">
+                <h1>My Account</h1>
+                <button id="logout-button" class="logout-btn">Logout</button>
+            </div>
+
+            <!-- Account Tabs -->
+            <div class="account-tabs">
+                <button class="tab-btn active" data-tab="orders">Order History</button>
+                <button class="tab-btn" data-tab="details">Account Details</button>
+                <button class="tab-btn" data-tab="wishlist">Wishlist</button>
+                <button class="tab-btn" data-tab="settings">Settings</button>
+            </div>
+
+            <!-- Tab Content Sections -->
+            
+            <!-- Order History Tab -->
+            <div id="orders-tab" class="tab-content active">
+                <h2>Order History</h2>
+                
+                <!-- Sample Order 1 -->
+                <div class="order-card" data-order-id="12345">
+                    <div class="order-header">
+                        <div class="order-info">
+                            <span class="order-number">Order #12345</span>
+                            <span class="order-date">Placed on November 15, 2024</span>
+                        </div>
+                        <span class="order-status status-delivered">Delivered</span>
+                    </div>
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://via.placeholder.com/100" alt="Nike Air Max 90" class="order-item-image">
+                            <div class="order-item-details">
+                                <h4>Nike Air Max 90</h4>
+                                <p>Size: 10.5 | Condition: New</p>
+                                <p class="item-price">$120.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <span class="order-total">Total: $120.00</span>
+                        <button class="view-order-btn" data-order-id="12345">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Sample Order 2 -->
+                <div class="order-card" data-order-id="12344">
+                    <div class="order-header">
+                        <div class="order-info">
+                            <span class="order-number">Order #12344</span>
+                            <span class="order-date">Placed on October 28, 2024</span>
+                        </div>
+                        <span class="order-status status-processing">Processing</span>
+                    </div>
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://via.placeholder.com/100" alt="Adidas Ultraboost" class="order-item-image">
+                            <div class="order-item-details">
+                                <h4>Adidas Ultraboost 22</h4>
+                                <p>Size: 11 | Condition: Like New</p>
+                                <p class="item-price">$95.00</p>
+                            </div>
+                        </div>
+                        <div class="order-item">
+                            <img src="https://via.placeholder.com/100" alt="Jordan 1 Retro" class="order-item-image">
+                            <div class="order-item-details">
+                                <h4>Jordan 1 Retro High</h4>
+                                <p>Size: 10.5 | Condition: Used</p>
+                                <p class="item-price">$180.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <span class="order-total">Total: $275.00</span>
+                        <button class="view-order-btn" data-order-id="12344">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Sample Order 3 -->
+                <div class="order-card" data-order-id="12343">
+                    <div class="order-header">
+                        <div class="order-info">
+                            <span class="order-number">Order #12343</span>
+                            <span class="order-date">Placed on September 12, 2024</span>
+                        </div>
+                        <span class="order-status status-cancelled">Cancelled</span>
+                    </div>
+                    <div class="order-items">
+                        <div class="order-item">
+                            <img src="https://via.placeholder.com/100" alt="Yeezy Boost 350" class="order-item-image">
+                            <div class="order-item-details">
+                                <h4>Yeezy Boost 350 V2</h4>
+                                <p>Size: 11 | Condition: New</p>
+                                <p class="item-price">$250.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <span class="order-total">Total: $250.00</span>
+                        <button class="view-order-btn" data-order-id="12343">View Details</button>
+                    </div>
+                </div>
+
+                <div class="no-orders" style="display: none;">
+                    <p>You haven't placed any orders yet.</p>
+                    <a href="index.html" class="shop-now-btn">Start Shopping</a>
+                </div>
+            </div>
+
+            <!-- Account Details Tab -->
+            <div id="details-tab" class="tab-content">
+                <h2>Account Details</h2>
+                <form id="account-details-form" class="account-form">
+                    <div class="form-group">
+                        <label for="customer-name">Full Name</label>
+                        <input type="text" id="customer-name" name="customer-name" value="John Doe" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-email">Email Address</label>
+                        <input type="email" id="customer-email" name="customer-email" value="john.doe@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="customer-phone">Phone Number</label>
+                        <input type="tel" id="customer-phone" name="customer-phone" value="+1 (555) 123-4567">
+                    </div>
+                    <button type="submit" class="save-btn">Save Changes</button>
+                </form>
+
+                <!-- Success/Error Messages -->
+                <div id="details-message" class="message-box" style="display: none;">
+                    <p id="details-message-text"></p>
+                </div>
+            </div>
+
+            <!-- Wishlist Tab -->
+            <div id="wishlist-tab" class="tab-content">
+                <h2>My Wishlist</h2>
+                <div class="wishlist-grid">
+                    <!-- Wishlist Item 1 -->
+                    <div class="wishlist-item" data-product-id="101">
+                        <button class="remove-wishlist-btn" data-product-id="101" title="Remove from wishlist">×</button>
+                        <img src="https://via.placeholder.com/300" alt="New Balance 550" class="wishlist-image">
+                        <div class="wishlist-details">
+                            <span class="wishlist-brand">New Balance</span>
+                            <h4 class="wishlist-name">550 White Green</h4>
+                            <p class="wishlist-price">$110.00</p>
+                            <button class="view-product-btn" data-product-id="101">View Product</button>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist Item 2 -->
+                    <div class="wishlist-item" data-product-id="102">
+                        <button class="remove-wishlist-btn" data-product-id="102" title="Remove from wishlist">×</button>
+                        <img src="https://via.placeholder.com/300" alt="Converse Chuck 70" class="wishlist-image">
+                        <div class="wishlist-details">
+                            <span class="wishlist-brand">Converse</span>
+                            <h4 class="wishlist-name">Chuck 70 High Top Black</h4>
+                            <p class="wishlist-price">$85.00</p>
+                            <button class="view-product-btn" data-product-id="102">View Product</button>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist Item 3 -->
+                    <div class="wishlist-item" data-product-id="103">
+                        <button class="remove-wishlist-btn" data-product-id="103" title="Remove from wishlist">×</button>
+                        <img src="https://via.placeholder.com/300" alt="Vans Old Skool" class="wishlist-image">
+                        <div class="wishlist-details">
+                            <span class="wishlist-brand">Vans</span>
+                            <h4 class="wishlist-name">Old Skool Classic</h4>
+                            <p class="wishlist-price">$65.00</p>
+                            <button class="view-product-btn" data-product-id="103">View Product</button>
+                        </div>
+                    </div>
+
+                    <!-- Wishlist Item 4 -->
+                    <div class="wishlist-item" data-product-id="104">
+                        <button class="remove-wishlist-btn" data-product-id="104" title="Remove from wishlist">×</button>
+                        <img src="https://via.placeholder.com/300" alt="ASICS Gel-Lyte III" class="wishlist-image">
+                        <div class="wishlist-details">
+                            <span class="wishlist-brand">ASICS</span>
+                            <h4 class="wishlist-name">Gel-Lyte III OG</h4>
+                            <p class="wishlist-price">$130.00</p>
+                            <button class="view-product-btn" data-product-id="104">View Product</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="no-wishlist" style="display: none;">
+                    <p>Your wishlist is empty.</p>
+                    <a href="index.html" class="shop-now-btn">Browse Shoes</a>
+                </div>
+            </div>
+
+            <!-- Settings Tab -->
+            <div id="settings-tab" class="tab-content">
+                <h2>Account Settings</h2>
+                
+                <!-- Change Password Section -->
+                <div class="settings-section">
+                    <h3>Change Password</h3>
+                    <form id="password-change-form" class="account-form">
+                        <div class="form-group">
+                            <label for="current-password">Current Password</label>
+                            <input type="password" id="current-password" name="current-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">New Password</label>
+                            <input type="password" id="new-password" name="new-password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-password">Confirm New Password</label>
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+                        </div>
+                        <button type="submit" class="save-btn">Update Password</button>
+                    </form>
+
+                    <!-- Success/Error Messages -->
+                    <div id="password-message" class="message-box" style="display: none;">
+                        <p id="password-message-text"></p>
+                    </div>
+                </div>
+
+                <!-- Email Preferences Section -->
+                <div class="settings-section">
+                    <h3>Email Preferences</h3>
+                    <form id="email-preferences-form" class="preferences-form">
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="promo-emails" name="promo-emails" checked>
+                            <label for="promo-emails">Receive promotional emails and special offers</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="order-emails" name="order-emails" checked>
+                            <label for="order-emails">Receive order updates and shipping notifications</label>
+                        </div>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="newsletter-emails" name="newsletter-emails">
+                            <label for="newsletter-emails">Subscribe to our monthly newsletter</label>
+                        </div>
+                        <button type="submit" class="save-btn">Save Preferences</button>
+                    </form>
+
+                    <!-- Success/Error Messages -->
+                    <div id="preferences-message" class="message-box" style="display: none;">
+                        <p id="preferences-message-text"></p>
+                    </div>
+                </div>
+
+                <!-- Delete Account Section -->
+                <div class="settings-section danger-zone">
+                    <h3>Delete Account</h3>
+                    <p>Once you delete your account, there is no going back. Please be certain.</p>
+                    <button id="delete-account-btn" class="delete-account-btn">Delete My Account</button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <!-- Confirmation Modal for Delete Account -->
+    <div id="delete-confirmation-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3>Delete Account</h3>
+            <p>Are you sure you want to delete your account? This action cannot be undone.</p>
+            <div class="modal-buttons">
+                <button id="cancel-delete-btn" class="cancel-btn">Cancel</button>
+                <button id="confirm-delete-btn" class="confirm-delete-btn">Delete Account</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/header-footer.js"></script>
+    <script src="scripts/customer-account.js"></script>
+</body>
+</html>
