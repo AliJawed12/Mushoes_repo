@@ -50,7 +50,8 @@ MuShoes web application consists of many user cases/features which can be split 
 2. Cloudinary API
    - To host images allowing application to showcase images
 
-###
+
+## How to Run
 
 1. First open MuShoes project folder inside Microsoft Visual Studio Code 
 2. Open terminal and type the following commands to install the following dependencies: 

@@ -16,12 +16,18 @@ Documentation consists of several layers
    4. How to Use
 2. [Frontend](Frontend.md)
    1. Overview of Frontend
-   2. Index.html
-   3. About.html
-   4. Shop.html
+   2. [Index.html](Frontend.md#1-indexhtml)
+   3. [About.html](Frontend.md#2-abouthtml)
+   4. [Shop.html](Frontend.md#3-shophtml)
    5. Account.html
    6. client.html
 3. [Backend](Backend.md)
    1. Different Files
    2. API
    3. Connections
+
+
+## Additional Information
+
+When documentation says "customers", the general users/audience is being referred to.
+When documnetation says "client", the owner of MuShoes, the person/group the application is developed for is being referred to.
