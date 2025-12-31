@@ -155,3 +155,171 @@ Accordion Block to showcase Brand Specific info
 Basic Contact Form
 
 NOTE: Contact Form currently able to do everything besides send or save data somewhere.
+
+
+## 3. Shop.html
+
+### Shop.html Architecture
+
+``` html
+<html>
+  <head>
+
+  </head>
+
+  <body>
+    <div class="header"></div>
+
+    <div class="shop-rows products-grid"></div>
+
+    <div class="footer"></div>
+  </body>
+</html>
+```
+
+### Shop.html Functionalaties
+
+1. Navigation to different .html pages using Header and Footer.
+2. Pulls data from database, generates HTML, and displays all currently available shoe listings
+3. Allowing clicking on a listing redirecting to Product.html which shows additinal details regarding the shoe
+
+
+### Related Files
+
+1. Shop.css
+2. Shop.js
+   - Containts JavaScript neccesary for frontend -> backend -> database connection
+
+### Code Documentation / Decision Making
+
+- Shop.html in itself is a simple page. It contains only the header, footer, and empty div which has shop-rows and products-grid used by JavaScript to store generated HTML
+  
+
+
+Shop.js
+
+#### fetchListingsFromMongoDB
+- Asynchronous function communcating with the backend
+- Sends a GET request to /fetch_all_listings endpoint
+- Backend queries all listings by calling [readAllListings](Backend.md#mongo_db_express_queries.js) helper function from [mongo_db_express_queries.js](Backend.md#mongo_db_express_queries.js), storing all data returned from call and parsing to /fetch_all_listings endpoint
+- Lastly, fetchListingsFromMongoDB takes the data and parses to showcaseListings() function
+
+#### showcaseListings(listings)
+- Method which takes the parsed in data and uses it to generate the html
+- Method then takes generated html and sets it to the div with the class .products-grid
+- Lastly, showcaseListings(listings) calls openListingFunctionality()
+
+#### openListingFunctionality()
+- Adds click event handler to each listing "card"
+- On click takes redirects to Product.html and sends the id into the url as well
+
+``` JavaScript
+window.location.href = `product.html?id=${id}`;
+```
+
+
+### Future Enhancements
+- Currently nothing in backend or frontend to prevent displaying listings which have 0 or negative stock. So need to implement that. Should be acheived through a simple if statement in maybe the JavaScript preventing display. I'd rather not do it in the [readAllListings](Backend.md#mongo_db_express_queries.js) since it's shared by other functions
+
+
+## Product.html
+
+### Execution Flow Overview
+
+1. Page finishes loading
+2. Product ID is extracted from the URL
+3. Backend is queried for that product’s data
+4. Product details are rendered dynamically
+5. User clicks Buy Now
+6. Stripe Checkout session is created and user is redirected
+
+### Product.html Architecture
+
+``` html
+<html>
+  <head>
+
+  </head>
+
+  <body>
+    <div class="header"></div>
+
+    <div class="product-page"></div>
+
+    <div class="footer"></div>
+  </body>
+</html>
+```
+
+### Product.html Functionalities
+
+1. Navigation to different .html pages using Header and Footer.
+2. Scrolling through various product images of the specific listing
+3. Allowing the ability to buy a shoe by clicking the "Buy Now" button, which redirects page to Stripe Checkout Sandbox
+
+
+### Related Files
+
+1. products.css
+2. product.js
+
+
+### Code Documentation / Decision Making
+
+- Product.html is intentionally minimal and contains only structural elements.
+- All product-specific data and UI are rendered dynamically using `product.js`.
+- This approach allows a single Product.html page to be reused for all listings.
+- Business logic (pricing, stock validation, checkout) is handled by the backend to ensure data integrity.
+
+#### product.js
+
+- Page waits until fully loaded, then calls getProductID()
+- A click event listener is attached using event delegation to handle the dynamically generated Buy Now button 
+
+##### getProuctId fucntion
+- Extracts the product ID from the URL query string
+- Calls getProductDetails(mongoID) and passes in the extracted ID
+
+##### getProductDetails(mongoID) function
+
+- Asynchronous function communicating with the backend
+- Sends a POST request to the /product endpoint with the MongoDB ID
+- Backend receives the ID and calls
+findAListing(mongoID)
+- If a matching listing is found, the backend returns the product data
+- The product data is passed to displayProductDetails(productDetails)
+
+##### displayProductDetails(productDetails)
+
+- Dynamically generates all product-related HTML content
+- Renders:
+  - Multiple product images (Cloudinary or full URLs)
+  - Brand, name, size, condition, and description
+  - Buy Now button with price
+- Disables the Buy Now button if product quantity is <= 0
+- Injects generated HTML into the .product-page container
+
+##### buyNow(productID)
+
+- Called when the Buy Now button is clicked
+- Asynchronous function communicating with the backend
+- Sends a POST request to the /create-checkout-session endpoint
+- Backend:
+  - Retrieves the product using findAListing(mongoID)
+  - Checks product quantity
+  - If quantity is <= 0, returns an insufficient quantity response
+  - If valid, creates a Stripe Checkout session
+  - Sends the Stripe redirect URL back to the frontend
+- buyNow() pauses execution until a response is received, then either:
+  - Displays an error message
+  - Redirects the user to Stripe Checkout
+
+
+### Future Enhancements
+
+- Add client-side handling for missing or invalid product IDs
+
+### Key Notes
+
+- A Stripe checkout session will never be created if the product quantity is <= 0
+- Backend validation ensures stock integrity regardless of frontend state

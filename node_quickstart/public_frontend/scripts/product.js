@@ -2,7 +2,7 @@ window.addEventListener("load", function() {
   getProductID();
   
   document.addEventListener("click", (e) => {
-    if (e.target.id === "add-to-cart-button") {
+    if (e.target.id === "buy-now-button") {
       const productId = e.target.dataset.id;
       console.log(productId);
       buyNow(productId);
@@ -15,6 +15,7 @@ window.addEventListener("load", function() {
 function getProductID() {
   // grab full url
   const url = new URLSearchParams(window.location.search);
+  // grab id from url
   const id = url.get("id");
   
   // call getProductDetails and parse in the shoe id
@@ -33,6 +34,7 @@ async function getProductDetails(mongoID) {
       body: JSON.stringify({ mongoID: mongoID }),
     });
 
+    // store the listing
     const data = await res.json();
     console.log(data.message);
     console.log(data.listing);
@@ -78,7 +80,7 @@ function displayProductDetails(productDetails) {
           <h3>Description</h3>
           <p>${productDetails.description}</p>
         </div>
-        <button id="add-to-cart-button" data-id="${productDetails._id}" ${productDetails.quantity <= 0 ? "disabled" : ""}>Buy Now · $${(productDetails.price / 100).toFixed(2)}</button>
+        <button id="buy-now-button" data-id="${productDetails._id}" ${productDetails.quantity <= 0 ? "disabled" : ""}>Buy Now · $${(productDetails.price / 100).toFixed(2)}</button>
       </div>
 
   `
