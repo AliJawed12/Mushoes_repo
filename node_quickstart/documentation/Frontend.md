@@ -271,16 +271,15 @@ window.location.href = `product.html?id=${id}`;
 - This approach allows a single Product.html page to be reused for all listings.
 - Business logic (pricing, stock validation, checkout) is handled by the backend to ensure data integrity.
 
-#### product.js
 
 - Page waits until fully loaded, then calls getProductID()
 - A click event listener is attached using event delegation to handle the dynamically generated Buy Now button 
 
-##### getProuctId fucntion
+#### getProuctId fucntion
 - Extracts the product ID from the URL query string
 - Calls getProductDetails(mongoID) and passes in the extracted ID
 
-##### getProductDetails(mongoID) function
+#### getProductDetails(mongoID) function
 
 - Asynchronous function communicating with the backend
 - Sends a POST request to the /product endpoint with the MongoDB ID
@@ -289,7 +288,7 @@ findAListing(mongoID)
 - If a matching listing is found, the backend returns the product data
 - The product data is passed to displayProductDetails(productDetails)
 
-##### displayProductDetails(productDetails)
+#### displayProductDetails(productDetails)
 
 - Dynamically generates all product-related HTML content
 - Renders:
@@ -299,7 +298,7 @@ findAListing(mongoID)
 - Disables the Buy Now button if product quantity is <= 0
 - Injects generated HTML into the .product-page container
 
-##### buyNow(productID)
+#### buyNow(productID)
 
 - Called when the Buy Now button is clicked
 - Asynchronous function communicating with the backend
@@ -323,3 +322,148 @@ findAListing(mongoID)
 
 - A Stripe checkout session will never be created if the product quantity is <= 0
 - Backend validation ensures stock integrity regardless of frontend state
+
+
+## Account.html
+
+### Execution Flow Overview
+
+1. Account page loads and initializes header/footer scripts
+2. Login and register form event listeners are attached on window load
+3. User switches between Login and Register tabs
+4. User submits login form
+5. Frontend sends credentials to `/admin-login`
+6. Backend validates credentials and returns redirect URL
+7. Frontend redirects user based on backend response
+
+
+### Account.html Architecture
+
+``` html
+<html>
+  <head>
+
+  </head>
+
+  <body>
+    <div class="header"></div>
+
+    <main class="account-main">
+      <div class="auth-container">
+
+        <div class="auth-tabs"></div>
+
+        <div id="loginForm"></div>
+
+        <div id="registerForm"></div>
+
+      </div>
+
+      <div class="confirmation-container"></div>  
+
+      </div>
+
+    </main>
+
+    <div class="footer"></div>
+  </body>
+</html>
+```
+
+### Account.html Functionalities
+
+1. Navigation to different .html pages using Header and Footer.
+2. Allowing Client to log in to Admin Dashboard
+
+### Related Files
+
+- account.css
+- account.js
+
+### Code Documentation / Decision Making
+
+#### On Window Load Function
+- JavaScript checks whether loginFormElement and registerFormElement exist on frontend. If they do, then they add submit event listeners which run handleLogin() and handleRegister() functions. 
+
+#### switchTab(tab) function
+- grabs loginTab, loginForm, registerTab, and registerForm id's from DOM.
+- Simple if-else branch checking 
+  ``` JavaScript
+  if (tab === 'login') {
+    // add class 'active' to all login related classes
+    // remove class 'active' from all non login related classes
+  }
+  else if (tab === 'register') {
+    // add class 'active' to all register related classes
+    // remove class 'active' from all non register related classes
+  }
+  ```
+- Calls clearErrorMessages() function
+
+#### async function handleLogin(e)
+
+- Prevents page refreshing and calls clearErrorMessages() function
+- JavaScript grabs username and password from DOM id's. Then performs error checking.
+  - Error checking is simple. Only checking for non null values
+- Sends a POST request to the /admin-login endpoint with the username and password
+- Backend receives the username and password from the endpoint, and checks those values against the ADMIN_USER and ADMIN_PASS enviornment variables.
+  ``` JavaScript
+  if (username === process.env.ADMIN_USER &&
+        password === process.env.ADMIN_PASS) {
+          // return /admin/admin-dashboard-munhak.html
+        }
+  ```
+  - If user entered username and password match the enviorment variables, then backend responds with url to admin dashboard
+  - if credentials don't match, then backend always returns default customer-account.html url
+- One frontend receives endpoint response, it checks if response ok and url exists, then redirects to url acquired from response
+- returns true
+
+#### function handleRegister(e)
+
+- Prevents page refreshing and calls clearErrorMessages() function
+- Grabs register_username, register_email, register_password, register_confirm_password from DOM using id's.
+- Performs error checking
+  - Ensures username is not null and length is at least 3
+  - Ensures email is not null and follows email format
+  - Ensures password is not null, is at least 6 characters long, and matches confrim password
+  - Console logs all the data. (In running application which has working registration form, this data wouldn't be logged but sent to the backend instead)
+- calls showConfirmation(username) function parsing in the username
+- returns true
+
+#### function showConfirmation(username)
+- Show confirmation page after successful registration
+- Grabs authContainer, confirmationContainer, and confirmedUsername from DOM using id's
+- Sets authContainer display to 'none', confirmationContainer display to 'block', and then finally sets confirmedUsername to the parsed in user
+
+#### function backToLogin()
+
+- Used inside registraion confirmation modal
+- Grabs authContainer and confirmationContainer from DOM using id's
+- Sets authContainer display to 'block' and confirmationContainer display to 'none'
+- Calls switchTab('login') and defauls to login form while also restting registration form
+
+#### function showError(formType, message)
+- Displays error messages at the top of the forms
+- Uses parsed in formType variable to determine whether error message is to be displayed on loginForm or registrationForm
+- Checks whether the error already exists. If not, then create the error message and display at the top of the form
+
+#### function clearErrorMessages()
+- Selects all elements with class error-message from DOM and then iterates through removing them all
+
+### Future Enhancements
+
+- Implement backend-powered user registration and persistence.
+- Replace environment-variable authentication with database-backed users
+- Add proper password hashing and session-based authentication.
+- Improve validation and error handling for login and registration.
+- Add loading states and prevent multiple form submissions.
+
+### Key Notes
+
+- Login functionality is admin-only and validates credentials against backend environment variables.
+- Only one admin user is supported at this time.
+- Registration form is frontend-only and does not persist user data.
+  - Will be removing this registration form for now as well as formTab for initial deployment. Should also be able to remove confirmation container as well.
+- Native browser validation is used for basic required field checks, with additional custom JavaScript validation and error handling applied after submission.
+- Frontend trusts the backend redirect URL after successful login.
+- Account page requires JavaScript to function correctly.
