@@ -2,6 +2,47 @@
 
 Documentation of General Frontend practices. Additionally specific page by page documentaion included as well.
 
+## Folder Architecutre
+- Folder is called public_frontend
+```
+> MUSHOES-ONLINE-STORE
+  > .vscode
+  > images
+  > node_quickstart
+    > documentation
+    > models
+    > mongodb-mongoose
+    > node_modules
+    > public_frontend
+      > admin
+        - admin-dashboard-munhak.html
+        - test-all-listing-checkout.html
+      > scripts
+      > styles
+      - about.html
+      - account.html
+      - cancel.html
+      - customer-account.html
+      - header-footer.html
+      - index.html
+      - product.html
+      - shop.html
+      - success.html
+    > temp_image_uploads
+    - .env
+    - cloudinary-connection.js
+    - db-connection.js
+    - expressServer.js
+    - index.js
+    - mongo_db_express_queries.js
+    - old-index.js
+    - package-lock.json
+    - package.json
+    - schema-connection.js
+    - seed.js
+    - testUpload.js
+```
+
 
 ## Overview
 
@@ -467,3 +508,178 @@ findAListing(mongoID)
 - Native browser validation is used for basic required field checks, with additional custom JavaScript validation and error handling applied after submission.
 - Frontend trusts the backend redirect URL after successful login.
 - Account page requires JavaScript to function correctly.
+
+
+## admin-dashboard-munhak.html
+
+### Execution Flow Overview
+
+1. Admin successfully authenticates via /admin-login endpoint
+2. Admin is redirected to admin-dashboard-munhak.html
+3. Page loads and initializes header, footer, and admin dashboard scripts
+4. Admin selects an operation from the dropdown:
+   1. Upload Listing
+   2. Delete Listing
+5. Based on selection:
+   1. Upload form is displayed and submission handled
+   2. OR existing listings are fetched and rendered for deletion
+6. Confirmation modals are used for success and delete confirmation
+7. Backend routes handle persistence and deletion in MongoDB
+
+### Admin-Dashboard-Munhak.html Architecture
+
+``` html
+<html>
+  <head>
+
+  </head>
+
+  <body>
+    <div class="header"></div>
+
+    <main class="admin-main-content">
+      
+      <div class="admin-dashboard-header"></div>
+
+      <div id="admin_operations"></div>  
+
+      <div id="upload_listing"></div>
+
+      <div id="delete_listing"></div>
+
+    </main>
+
+    <div class="footer"></div>
+
+    <div id="confirmationModal"></div>
+  </body>
+</html>
+```
+
+### Admin-Dashboard-Munhak.html Functionalities
+
+1. Navigation to different .html pages using Header and Footer
+2. Upload new shoe listings to MongoDB
+3. View all existing listings
+4. Delete listings from MongoDB
+5. Confirmation modals for upload success and deletion
+6. Image upload and preview using Cloudinary-hosted images
+
+### Related Files
+
+1. admin-listings.css
+2. admin-all-listings.css
+3. admin-dashboard-scripts.js
+
+### Code Documentation / Decision Making
+
+#### On window load function
+
+- Adds a change event listener to the admin operation dropdown
+- Toggles visibility of:
+  - upload_listing
+  - delete_listing
+- When Delete Listing is selected:
+  - Calls viewAllListings() to fetch listings from the backend
+- Adds:
+  - Submit button click listener
+  - Modal close handlers
+  - Click-outside modal detection
+
+#### Async function SubmitListing(e)
+
+- Disables submit button to prevent duplicate submissions
+- Prevents page reload
+- Calls formValidation() before proceeding
+- Collects all form values into a shoeData object
+- Converts listing data into FormData
+- Required so images can be processed via multer, so that url may be uploaded to Cloundinary later
+- Sorts uploaded images alphabetically
+- Sends POST request to /admin/dashboard/upload_listing
+- Backend Behavior:
+  - Parses listing JSON
+  - Sorts images
+  - Stores image paths
+  - Saves listing in MongoDB using Shoe schema
+- Frontend On Success of Backend:
+  - Displays success confirmation modal
+  - Clears upload form
+  - Re-enables submit button
+
+#### formValidation()
+
+- Performs frontend validation before upload:
+  - Ensures required fields are not empty
+  - Validates:
+    - Shoe size (positive number)
+    - Gender (M or F)
+    - Price (>= 0, in cents)
+    - Stock (minimum of 1)
+- Displays styled error message if validation fails
+
+#### async function viewAllListings()
+
+- Sends GET request to /admin/dashboard/view_deletable_listings
+- Backend calls and retrieves all listings using readAllListings().
+- Backend returns data to frontend where all listings are passed to showCaseListings(listings) function.
+
+#### function showcaseListings(listings)
+
+- Dynamically generates HTML for each listing
+- Displays:
+  - Image (Cloudinary or placeholder)
+  - Brand, name, price
+  - Size, gender, condition, stock
+- Injects listings into .products-grid
+- Calls listingDeletionFunctionality() after render
+
+#### function listingDeletionFunctionality()
+
+- Adds click handlers to all rendered listings
+- On click:
+  - Extracts listing details from DOM
+  - Opens delete confirmation modal
+  - Passes listing metadata into modal
+
+#### function deleteListingRequest(mongoID)
+
+- Sends POST request to /admin/dashboard/delete_listing
+- Backend deletes listing using deletAListing(mongoID)
+- MongoDB entry is permanently removed
+
+#### Delete Confirmation Flow
+
+1. Admin clicks listing
+2. Delete confirmation modal appears
+3. Admin clicks Delete
+4. confirmDelete() is called
+5. Backend deletion request is sent
+6. Success modal is displayed
+7. Listings refresh automatically
+
+#### Confirmation Modal System
+
+- Single modal reused for:
+  - Upload success
+  - Delete confirmation
+  - Delete success
+- Modal dynamically updates:
+  - Icon
+  - Title
+  - Body content
+  - Footer buttons
+- Clicking outside modal or close button exits modal
+
+### Future Enhancements
+
+- Add image handling deletion to Cloudinary when when listings are removed
+- Insteda of permenantly deleting listings, send them to a recnetly deleted folder in MongoDB, in case client needs records later
+
+### Key Notes
+
+- Admin dashboard is protected using express-basic-auth
+- Only authenticated admins can access /admin/* routes
+- All listing creation and deletion is validated on the backend
+- Images are processed using multer before being stored
+- Frontend prevents invalid submissions but backend remains the source of truth
+- Confirmation modals are reused for consistency and UX clarity
