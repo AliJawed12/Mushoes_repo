@@ -10,11 +10,15 @@ window.addEventListener("load", function() {
     loginFormElement.addEventListener("submit", handleLogin);
   }
 
+  /*
+  Commenting out event handler for submit button for register form
+
   // Registration form submission
   const registerFormElement = $id("registerFormElement");
   if (registerFormElement) {
     registerFormElement.addEventListener("submit", handleRegister);
   }
+  */
 });
 
 // Switch between login and register tabs
@@ -30,10 +34,18 @@ function switchTab(tab) {
     loginForm.classList.add('active');
     registerForm.classList.remove('active');
   } else if (tab === 'register') {
+    // removed all interactivtity, clicking register in tab does nothing
+    /*
     registerTab.classList.add('active');
     loginTab.classList.remove('active');
     registerForm.classList.add('active');
     loginForm.classList.remove('active');
+    */
+
+    loginTab.classList.add('active');
+    registerTab.classList.remove('active');
+    loginForm.classList.add('active');
+    registerForm.classList.remove('active');
   }
 
   // Clear any error messages
