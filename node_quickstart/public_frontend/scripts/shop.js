@@ -36,8 +36,17 @@ function showcaseListings(listings) {
 
   const cloudinaryBase = 'https://res.cloudinary.com/dasqssuki/image/upload/';
 
+ 
+
   // for each listing, take its data and generate HTML
   listings.forEach(product => {
+
+    // if stock <= 0, then skip the html generation
+
+    if (product.stock <= 0) {
+      return;
+    }
+  
 
     // check whether stored listing has image url, if so display it, if not display default image
     const imgSrc = product.images?.[0]
