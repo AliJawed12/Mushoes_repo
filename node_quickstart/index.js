@@ -7,7 +7,7 @@
 // Express Imports here
 import express from 'express';
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 //--------------------------------
 // Admin Frontend Authentication
