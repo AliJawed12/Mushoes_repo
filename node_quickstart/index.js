@@ -232,13 +232,12 @@ app.post("/admin-login", (req, res) => {
         url: "/admin/admin-dashboard-munhak.html"
       });
     }
-
-    // else always serve basic customer account html
-    return res.json({
-      success: true,
-      url: "/customer-account.html"
-    });
-
+    else {
+      return res.json({
+        success: false,
+        message: "Account Does Not Exist"
+      })
+    }
    
 
   } catch (err) {
