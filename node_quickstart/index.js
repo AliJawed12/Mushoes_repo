@@ -201,8 +201,8 @@ app.post("/create-checkout-session", async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: "http://35.32.35.153:5000/success.html",
-      cancel_url: "http://35.32.35.153:5000/cancel.html",
+      success_url: "https://mushoes-server.onrender.com//success.html",
+      cancel_url: "https://mushoes-server.onrender.com//cancel.html",
       metadata: {
         mongoId,
       },
