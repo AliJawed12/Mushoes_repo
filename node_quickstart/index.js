@@ -178,7 +178,7 @@ app.post("/create-checkout-session", async (req, res) => {
     const listing = await findAListing(mongoId);
 
     // if quanitiy is less than or equal to 0 then never create session 
-    if (!listing || listing.quantity <= 0) {
+    if (!listing || listing.quantity <= 0 || listing.stock <= 0) {
       return res.status(400).json({
         message: "This item is sold out.",
       });

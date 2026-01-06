@@ -41,11 +41,7 @@ function showcaseListings(listings) {
   // for each listing, take its data and generate HTML
   listings.forEach(product => {
 
-    // if stock <= 0, then skip the html generation
-
-    if (product.stock <= 0) {
-      return;
-    }
+   
   
 
     // check whether stored listing has image url, if so display it, if not display default image
