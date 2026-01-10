@@ -204,7 +204,8 @@ app.post("/create-checkout-session", async (req, res) => {
       success_url: "https://mushoes-server.onrender.com//success.html",
       cancel_url: "https://mushoes-server.onrender.com//cancel.html",
       metadata: {
-        mongoId,
+        mongoId: mongoId,
+        mushoesId: listing.mushoes_custom_id
       },
     });
 
@@ -247,6 +248,35 @@ app.post("/admin-login", (req, res) => {
       message: "Server error"
     });
   }
+});
+
+// endpoint for stripe webhook
+
+app.post("/stripe/order-success", express.raw({type: 'application/json'}), async (req, res) => {
+  
+  const sig = req.headers['stripe-signature'];
+  const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET;
+  
+  let event;
+  
+  try {
+    event = stripe.webhooks.constructEvent(req.body, sig, endpointSecret);
+  } catch (err) {
+    console.log(`Webhook Error: ${err.message}`);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+  
+  // Handle the event
+  if (event.type === 'checkout.session.completed') {
+    const session = event.data.object;
+    const mongoId = session.metadata.mongoId;
+    
+    // Update your database here
+    console.log("Deleting Stock");
+  }
+  
+  res.json({received: true});
+
 });
 
 
